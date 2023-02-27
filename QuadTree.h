@@ -7,7 +7,7 @@
 #include "twoVectsDoub.h"
 #include "tripleVect.h"
 
-//A class representing a tree where each node has 4 children. Each node represents a single cell in the
+//A class representing a tree where each node has N children. Each node represents a single cell in the
 //adaptive grid.
 class QuadTree
 {
@@ -18,6 +18,10 @@ private:
  * */
     Node *root;
     double scaleCutoff(double cutoff, int level);
+    //how many children?
+    //note: 2 dimensions-> 4 children, 3 dimensions-> 8 children. should have 2^dimensions children
+    int N;
+    int dimensions;
 
 
 public:
@@ -30,9 +34,9 @@ public:
      * */
     QuadTree();
     /**
-     * Constructs a QuadTree with the given rectangle s.
+     * Constructs a QuadTree with the given RectangleN s.
      * */
-    QuadTree(Rectangle *s, double minX, double maxX, double minY, double maxY);
+    QuadTree(RectangleN *s, std::vector<double> mins, std::vector<double> maxes, int N, int dim1, int dim2);
     /**
      * Constructs a QuadTree given a list of nodes.
      * */
@@ -79,7 +83,7 @@ public:
     /**
      * Setter for the root of this QuadTree
      * */
-    void setRoot(Rectangle *s);
+    void setRoot(RectangleN *s);
     //divides the tree given a function F; void is placeholder for now
     /**
      * Applies a multivariable variant of Adaptive Quadrature on this particular tree, starting 
@@ -89,7 +93,7 @@ public:
      * @param tol the maximum absolute error that we are allowing between the analytical integral
      * over a region and the approximate integral over the region.
      * */
-    void divide(double minX, double maxX, double minY, double maxY, Function *F, Node *n, double tol, int maximumLevel);
+    void divide(Function *F, Node *n, double tol, int maximumLevel);
     /**
      * Returns a list of all of the outboxes corresponding to the region that this QuadTree represents
      * i.e. the boxes where sand needs to be removed from.
@@ -98,7 +102,7 @@ public:
      * @param cutoff the minimum difference there can be in the function where we will count it
      * as an outbox.
      * */
-    vector<Rectangle *> getOutBoxes(Node *n, Function *F, double cutoff);
+    vector<RectangleN *> getOutBoxes(Node *n, Function *F, double cutoff);
     /**
      * Returns a list of all of the inboxes corresponding to the region that this QuadTree represents
      * i.e. the boxes where sand needs to be added to.
@@ -107,7 +111,7 @@ public:
      * @param cutoff the minimum difference there can be in the function where we will count it
      * as an inbox.
      * */
-    vector<Rectangle *> getInBoxes(Node *n, Function *F, double cutoff);
+    vector<RectangleN *> getInBoxes(Node *n, Function *F, double cutoff);
     /**
      * Returns a twoVector object, where v1 is the vector with all of the outboxes and v2 is the vector
      * with all of the inboxes
@@ -124,22 +128,22 @@ public:
      * @param F the function that we are looking at
      * @param tol the maximum tolerable error between the estimated integral and the actual integral
      * */
-    void divideTree(double minX, double maxX, double minY, double maxY, Function *F, double tol, int maximumLevel);
+    void divideTree(Function *F, double tol, int maximumLevel);
     /**
      * Draws the QuadTree out onto the screen. Unimportant graphics- related method.
      * */
-    void draw(sf::RenderWindow*);
+    void draw(sf::RenderWindow*, int dim1, int dim2);
     /**
      * Draws the grid that stems from the Node passed in as a parameter. Main utility is 
      * @param Node* the node at where we want to start drawing the tree.
      * */
-    void drawRoot(Node*, sf::RenderWindow*);
+    void drawRoot(Node*, sf::RenderWindow*, int dim1, int dim2);
     /** method that has the main purpose of debugging. It a tree, starting from node n, level times.
      * @param minX maxX minY maxY parameters that define the boundaries of the forest that the QuadTree
      * lies in. This determines the width and height of each "cell", which in turn helps us create the
-     * graphics rectangle needed to draw out the tree.
+     * graphics RectangleN needed to draw out the tree.
      * **/
-    void divideTreeNTimes(double minX, double maxX, double minY, double maxY, Node *n, int level);
+    void divideTreeNTimes(Node *n, int level);
     /**
      * Divides the current tree by the criteria that the difference between the midpoint approximation on 
      * the node n and the sum of the riemann approximations of all its children is greater than tol.
@@ -151,7 +155,7 @@ public:
      * @param F is the function we are dividing our tree based on.
      * @param n is the node we are starting the division from.
      * */
-    void divideCompMid(double minX, double maxX, double minY, double maxY, Node *n, Function *F, double tol, int maximumLevel);
+    void divideCompMid(std::vector<double> mins, std::vector<double> maxes, Node *n, Function *F, double tol, int maximumLevel, int dim1, int dim2);
     /**
      * Gives the array of the values of the integral apprximation of all the cells in this QuadTree,
      * where supply and demand can be extracted from this array.
@@ -171,7 +175,7 @@ public:
      * Same as divideCompMid, but instead uses the more accurate getAccurateApprox to calcualte the criteria
      * for division.
      * */
-    void divideCompMidAcc(double minX, double maxX, double minY, double maxY, Node *n, Function *F, double tol, int maximumLevel, int accuracy);
+    void divideCompMidAcc(Node *n, Function *F, double tol, int maximumLevel, int accuracy);
     /**
      * Same as getAllRelevantVects, but uses the more accurate integral approximation.
      * */
@@ -180,9 +184,10 @@ public:
     twoVectsDoub getSupplyDemandAmt(Function *F, double cutoff);
     double normalizeAcc(Node *n, Function *F, int accuracy);
 
-    tripleVect* getAllRelevantVectsGaussQuad(Node *n, Function *F, double cutoff, int MAX_ITERATIONS, GaussianQuadrature *gaussQuad);
+    //tripleVect* getAllRelevantVectsGaussQuad(Node *n, Function *F, double cutoff, int MAX_ITERATIONS, GaussianQuadrature *gaussQuad);
 
     vector<std::string> getStringCoordOfAllCells(Node *n);
+    int getNumLeaves();
 };
 
 #endif

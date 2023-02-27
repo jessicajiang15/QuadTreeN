@@ -27,10 +27,7 @@ double LegendrePolynomial::evaluate(double x, int n)
 
 double LegendrePolynomial::value(double x)
 {
-    //std::cout<<"x"<<x<<std::endl;
-
     double value = evaluate(x, this->n);
-    //std::cout<<"value"<<value<<std::endl;
     return value;
 }
 
@@ -44,8 +41,6 @@ double LegendrePolynomial::nderivative(double x, int n)
     {
         return 1;
     }
-    //std::cout<<"hi"<<std::endl;
-    //std::cout<<n / (pow(x, 2) - 1)<<std::endl;
     return (n / (x*x - 1)) * (x * LegendrePolynomial::evaluate(x, n) - LegendrePolynomial::evaluate(x, n - 1));
 }
 
@@ -74,7 +69,6 @@ if(this->n%2!=0)
 {
     roots.push_back(0);
 }
-std::cout<<"root size"<<roots.size()<<std::endl;
     return roots;
 }
 
@@ -87,8 +81,6 @@ double LegendrePolynomial::getGuess(int i)
 //acc digits of precision
 double LegendrePolynomial::newtonRaphsonIthRoot(int i, double acc, int MAX_ITERATIONS)
 {
-               // std::cout<<"ASJKANJSKA"<<std::endl;
-
     double currRoot = getGuess(i);
     double dx;
     int iterations = 0;

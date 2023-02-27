@@ -42,7 +42,7 @@ class Gaussian : public Function
     /**
      * Evaluates the function at the cartesian point (x, y)
      * */
-    double value(double x, double y) override;
+    double value(double x, double y);
     /*
     * Setter for normConst which normalizes the gaussian.
     */

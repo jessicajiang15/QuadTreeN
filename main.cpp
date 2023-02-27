@@ -5,20 +5,23 @@
 #include "TestExponentialFunction.h"
 #include <chrono>
 #include "Test2DExpFcn.h"
+#include "GaussianN.h"
 
 
 //define everything as a floating point
 
-/**
+/** 
  * Parameters of the forest
  * */
 
+//how many dimensions do u have
+#define DIMS 4
 
-#define NBOXES 20
-#define MIN_Y -5.0
-#define MAX_Y 5.0
-#define MIN_X -5.0
-#define MAX_X 5.0
+//Nboxes^N total boxes
+#define NBOXES 10
+
+#define DRAW_DIM_1 0
+#define DRAW_DIM_2 1
 /**
  * Parameters of the gaussian functions
  * Gives an initial gaussian of the form AINIT*E^[-(x-X1)^2-(y-Y1)^2/RHO^2]
@@ -43,13 +46,13 @@
 //defines the maximum level you will allow the grid to divide to.
 #define MAX_LEVEL 4
 //determines how finely you divide the grid
-#define TOL 0.001
+#define TOL 0.0001
 //determines how accurate the numerical integrals are, overall. 10 means "divide the current box into 10, then
 //calculate the midpoint riemann sum for all 10 mini-boxes and add them up to get my approximation."
 //note that this includes the normalization accuracy.
 #define ACC 1000
 #define CUTOFF_ACC 10
-#define READ_FILE true
+#define READ_FILE false
 
 /*
 Gaussian Quadrature related definitions.
@@ -64,12 +67,12 @@ Gaussian Quadrature related definitions.
 //how many digits you want in the final value
 #define PRECISION 50
 
+#define MIN -5;
+#define MAX 5;
+
 
 int nboxes=NBOXES;
-double min_y=MIN_Y;
-double max_y=MAX_Y;
-double min_x=MIN_X;
-double max_x=MAX_X;
+
 double cutoff=CUTOFF;
 int max_level=MAX_LEVEL;
 double tol=TOL;
@@ -78,9 +81,15 @@ double acc=ACC;
 double p=P;
 double rho=RHO;
 double theta=THETA;
+
+int themin=-5;
+
+int themax=5;
+
+vector<double> displacements;
+
 double x1=X1;
 double y_1=Y1;
-
 
 void appendDataToFile(ofstream *file);
 
@@ -89,8 +98,39 @@ void defineAllConstants(ifstream *file);
 void defineAllConstantsNoRead();
 
 
+
+
 int main()
 {
+    displacements.push_back(x1);
+    displacements.push_back(y_1);
+    displacements.push_back(0);
+    displacements.push_back(0);
+
+
+    double min;
+    double max;
+
+    std::vector<double> mins;
+
+    std::vector<double> maxes;
+
+    std::vector<int> nboxesList;
+
+
+//xmin y min etc
+    for(int i=0;i<DIMS;i++)
+    {
+        mins.push_back(themin);
+        maxes.push_back(themax);
+    }
+
+    //change this if you want different nboxes for each
+    for(int i=0;i<DIMS;i++)
+    {
+        nboxesList.push_back(NBOXES);
+    }
+
     /**
      * define the files that we will put data in and also open them. Note that this will
      * override any preexisting file named "inData.csv" and "outData.csv", so make sure
@@ -170,17 +210,14 @@ int main()
     else
     {
         //defineAllConstantsNoRead();
-        std::cout<< cutoff << std::endl;
-        cout<<"nBOXX"<<nboxes<<endl;
-        cout<<min_x<<endl;
-        cout<<max_x<<endl;
-        cout<<min_y<<endl;
-        cout<<max_y<<endl;
-        cout<<cutoff<<endl;
-        cout<<tol<<endl;
-        cout<<max_level<<endl;
-        cout<<acc<<endl;
+       // std::cout<< cutoff << std::endl;
+       // cout<<"nBOXX"<<nboxes<<endl;
+       // cout<<cutoff<<endl;
+       // cout<<tol<<endl;
+       // cout<<max_level<<endl;
+        //cout<<acc<<endl;
     }
+
 
     /**
      * The graphics is mainly here for debugging purposes.
@@ -197,20 +234,18 @@ int main()
      * preprocessors.
      * */
 
-    Forest *forest = new Forest(nboxes, nboxes, min_x, max_x, min_y, max_y);
+    Forest *forest = new Forest(nboxesList, mins, maxes, DRAW_DIM_1, DRAW_DIM_2);
     double cut = forest->getScaledCutOffMinSizeDif(nboxes, cutoff);
     cout << "cutoff: " << cut << endl;
-        cout << "x1: " << x1 << endl;
 
     //normalization should not depend on how precise we define the grid to be, so we create
     //a second forest
-    Forest *normForest = new Forest(100, 100, min_x, max_x, min_y, max_y);
+    //Forest *normForest = new Forest(100, 100, mins, maxes);
     //double a, double rho, double p, double theta,double x1, double y1
     //double a, double b, double c, double d, double e, int type
-    Gaussian *final = new Gaussian(AFIN, rho, p, theta,x1,y_1);
-    Gaussian *initial = new Gaussian(AINIT, rho,3);
-
-    cout << "lmaomlamo"<<final->getNormConst() << endl;
+    GaussianN *initial = new GaussianN(AFIN,rho,p,theta,displacements,DIMS, 1);
+    GaussianN *final = new GaussianN(AINIT, rho, p, theta,displacements,DIMS);
+    //double rho, double p, double theta, std::vector<double> displacements, int N
 
     /**
      * Normalize our initial and final functions with the normForest, which splits
@@ -219,8 +254,8 @@ int main()
     if (AUTO_NORM)
     {
         cout<<"auto norm"<<endl;
-        normForest->normalize(final);
-        normForest->normalize(initial);
+        //normForest->normalize(final);
+        //normForest->normalize(initial);
     }
     else
     {
@@ -229,41 +264,46 @@ int main()
         final->normalize(NORM_CONST_FIN);
     }
 
-    cout << final->getNormConst() << endl;
-    cout << initial->getNormConst() << endl;
+    //cout << final->getNormConstant() << endl;
+   // cout << initial->getNormConstant() << endl;
     CompTwoFunc *gaussian = new CompTwoFunc(initial, final);
-    cout << "val"<<gaussian->value(5, 5) << endl;
+    std::vector<double> values;
+    for(int i=0;i<2;i++)
+    {
+        values.push_back(0.1);
+    }
+    values.push_back(0.1);
+    values.push_back(0.1);
 
-    cout << "val"<<gaussian->value(4, 4) << endl;
+    cout << "val initial"<<initial->value(values) << endl;
+    cout << "val final"<<final->value(values) << endl;
+    cout << "val difference"<<gaussian->value(values) << endl;
 
-    cout << "val"<<initial->value(5, 5) << endl;
-
-    cout << "val"<<initial->value(5, 5) << endl;
-
-
-
-    cout << "val"<<final->value(2, 2) << endl;
-
-    cout << "val"<<final->value(1, 1) << endl;
-
-    cout << "val"<<gaussian->value(0, 0) << endl;
-
+    std::cout<<"eeeeeee"<<forest->getForest().size()<<std::endl;
+    std::cout<<"WHAAAAAA"<<forest->getForest()[0]->getRoot()->getRekt()->getN()<<std::endl;
 
     //cout<<final->getNormConst()<<endl;
     //cout<<initial->getNormConst()<<endl;
     //if anything in this program is taking too long, feel free to use these commented out lines of code
     //to figure out how much time a portion of the code is taking.
 
+    //UNCOMMENT OUT
+    forest->divideComp(tol, gaussian, max_level, DRAW_DIM_1,DRAW_DIM_2);
+    //std::cout<<"total number of boxes:"<<forest->getNumLeaves()<<std::endl;
 
-    forest->divideComp(tol, gaussian, max_level);
+    //std::cout<<"eeeeeee"<<forest->getForest().size()<<std::endl;
+    //std::cout<<"WHAAAAAA2"<<forest->getForest()[0]->getRoot()->getRekt()->getN()<<std::endl;
+
     //forest->appendEverythingToTwoFilesAcc(&outData, &inData, gaussian, cutoff, ACC, CUTOFF_ACC);
 
-    forest->appendEverythingToTwoFilesGaussQuad(&outData, &inData, gaussian, cut, MAX_ITERATIONS, acc, N, PRECISION);
+    //forest->appendEverythingToTwoFilesGaussQuad(&outData, &inData, gaussian, cut, MAX_ITERATIONS, acc, N, PRECISION);
     //&outData,&inData, gaussian, cutoff, MAX_ITERATIONS, ACC,N,PRECISION
     //forest->appendEverythingToTwoFilesGaussQuad(&outData,&inData, gaussian,cutoff, MAX_ITERATIONS, GAUSS_ACC, CUTOFF_ACC, N);
 
     forest->appendCoordsCellsToFiles(&cellCoords, PRECISION);
     appendDataToFile(&appendData);
+
+
     //  auto end = std::chrono::high_resolution_clock::now();
 
     //cout<<"time: "<<std::chrono::duration_cast<std::chrono::microseconds>(end - start).count()<<endl;
@@ -277,7 +317,6 @@ int main()
     music.setVolume(50);
     //music.play();
 */
-    cout<<"HELLOOOOOOO"<<x1<<endl;
     cout << "I'm done!" << endl;
     //this while loop basically keeps the graphics up and running.
     while (window.isOpen())
@@ -299,7 +338,7 @@ int main()
         window.clear(sf::Color::White);
 
         //displays the forest on the screen
-        forest->draw(&window);
+        forest->draw(&window, DRAW_DIM_1, DRAW_DIM_2);
 
         window.display();
     }
@@ -325,10 +364,10 @@ void appendDataToFile(ofstream *file)
      * */
     *file << nboxes <<"\t"<< 0 << "\t" << 0 << "\t" << 0 << "\t"
           << "\n";
-    *file << min_y << "\t";
-    *file << max_y << "\t";
-    *file << min_x << "\t";
-    *file << max_x << "\n";
+
+    *file << themin << "\t";
+    *file << themax << "\t";
+
     *file << cutoff <<"\t"<< 0 << "\t" << 0 << "\t" << 0 << "\t"
           << "\n";
     *file << p <<"\t"<< 0 << "\t" << 0 << "\t" << 0 << "\t"
@@ -339,6 +378,8 @@ void appendDataToFile(ofstream *file)
           << "\n";
     *file << y_1 <<"\t"<< 0 << "\t" << 0 << "\t" << 0 << "\t"
           << "\n";
+    *file << DIMS <<"\t"<< 0 << "\t" << 0 << "\t" << 0 << "\t"
+          << "\n";
 }
 
 void defineAllConstants(ifstream *thefile)
@@ -346,10 +387,12 @@ void defineAllConstants(ifstream *thefile)
     int a=0;
     double temp;
     nboxes=NBOXES;
+    /*
     min_y=MIN_Y;
     max_y=MAX_Y;
     min_x=MIN_X;
     max_x=MAX_X;
+    */
     cutoff=CUTOFF;
     max_level=MAX_LEVEL;
     acc=ACC;
@@ -363,19 +406,19 @@ void defineAllConstants(ifstream *thefile)
             }
             case 1:
             {
-                min_y=temp;
+                //min=temp;
             }
             case 2:
             {
-                max_y=temp;
+               // max=temp;
             }
             case 3:
             {
-                min_x=temp;
+                //min=temp;
             }
             case 4:
             {
-                max_x=temp;
+               // max=temp;
             }
             case 5:
             {
@@ -417,7 +460,7 @@ void defineAllConstants(ifstream *thefile)
             }
         a++;
         }
-        cout<<"HAHAHAHAHHAHA: "<<min_y<<endl;
+        //cout<<"HAHAHAHAHHAHA: "<<min_y<<endl;
         cout<<theta<<endl;
         cout<<p<<endl;
         cout<<rho<<endl;
@@ -431,10 +474,12 @@ void defineAllConstants(ifstream *thefile)
 void defineAllConstantsNoRead()
 {
     nboxes=NBOXES;
+    /*
     min_y=MIN_Y;
     max_y=MAX_Y;
     min_x=MIN_X;
     max_x=MAX_X;
+    */
     cutoff=CUTOFF;
     max_level=MAX_LEVEL;
     acc=ACC;

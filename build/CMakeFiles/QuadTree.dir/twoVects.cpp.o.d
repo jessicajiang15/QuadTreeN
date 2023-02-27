@@ -1,6 +1,6 @@
 CMakeFiles/QuadTree.dir/twoVects.cpp.o: \
-  /Users/Jessica/git/QuadTree/twoVects.cpp \
-  /Users/Jessica/git/QuadTree/twoVects.h \
+  /Users/Jessica/git/QuadTreeN/twoVects.cpp \
+  /Users/Jessica/git/QuadTreeN/twoVects.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \
@@ -162,11 +162,13 @@ CMakeFiles/QuadTree.dir/twoVects.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/Jessica/git/QuadTree/Rectangle.h \
-  /Users/Jessica/git/QuadTree/Point.h \
+  /Users/Jessica/git/QuadTreeN/RectangleN.h \
+  /Users/Jessica/git/QuadTreeN/Point.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/math.h \
-  /Users/Jessica/git/QuadTree/Function.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iostream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ios \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string_view \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__string \
@@ -177,9 +179,6 @@ CMakeFiles/QuadTree.dir/twoVects.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_wctrans_t.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iostream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/ios \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__locale \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/mutex \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__mutex_base \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/system_error \
@@ -231,6 +230,7 @@ CMakeFiles/QuadTree.dir/twoVects.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/_types/_nl_item.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/bitset \
+  /Users/Jessica/git/QuadTreeN/Function.h \
   /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Window.hpp /usr/local/include/SFML/System.hpp \
   /usr/local/include/SFML/Config.hpp \
@@ -309,7 +309,7 @@ CMakeFiles/QuadTree.dir/twoVects.cpp.o: \
   /usr/local/include/SFML/Graphics/Sprite.hpp \
   /usr/local/include/SFML/Graphics/Text.hpp \
   /usr/local/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/Jessica/git/QuadTree/GraphicsMechanics.h \
+  /Users/Jessica/git/QuadTreeN/GraphicsMechanics.h \
   /usr/local/include/SFML/Audio.hpp \
   /usr/local/include/SFML/Audio/InputSoundFile.hpp \
   /usr/local/include/SFML/Audio/Export.hpp \
@@ -328,12 +328,4 @@ CMakeFiles/QuadTree.dir/twoVects.cpp.o: \
   /usr/local/include/SFML/Audio/SoundFileFactory.inl \
   /usr/local/include/SFML/Audio/SoundFileReader.hpp \
   /usr/local/include/SFML/Audio/SoundFileWriter.hpp \
-  /Users/Jessica/git/QuadTree/GaussianQuadrature.h \
-  /Users/Jessica/git/QuadTree/twoVectsDoub.h \
-  /Users/Jessica/git/QuadTree/LegendrePolynomial.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iomanip \
-  /Users/Jessica/git/QuadTree/OneDFunction.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/fstream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/filesystem \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stack \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/deque
+  /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iomanip

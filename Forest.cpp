@@ -1,38 +1,86 @@
 #include "Forest.h"
 
-Forest::Forest(int rows, int cols, double minCoordX, double maxCoordX, double minCoordY, double maxCoordY)
+Forest::Forest(vector<QuadTree*> forest, vector<Pointint*> points)
 {
-    forest = new QuadTree *[rows * cols];
-    this->rows = rows;
-    this->cols = cols;
-    this->minCoordX = minCoordX;
-    this->minCoordY = minCoordY;
-    this->maxCoordX = maxCoordX;
-    this->maxCoordY = maxCoordY;
-    this->width = (maxCoordX - minCoordX) / cols;
-    this->height = (maxCoordY - minCoordY) / rows;
-    for (int r = 0; r < rows; r++)
+    this->forest=forest;
+    this->coords=points;
+}
+
+Forest::Forest(vector<int> nboxAtDim, vector<double> minCoords, vector<double> maxCoords, int dim1, int dim2)
+{
+    this->N=nboxAtDim.size();
+    this->minCoords=minCoords;
+    this->maxCoords=maxCoords;
+    this->nboxAtDim=nboxAtDim;
+    for(int i=0;i<this->N;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-
-            Rectangle *temp = new Rectangle(Forest::getCoordX(c), Forest::getCoordY(r), width, height);
-
-            forest[index(r, c)] = new QuadTree(temp, minCoordX, maxCoordX, minCoordY, maxCoordY);
-        }
+        //interval
+        double tot=maxCoords[i]-minCoords[i];
+        //get the width of each box
+        double width=tot/nboxAtDim[i];
+        this->widths.push_back(width);
     }
+
+    //total amount of boxes
+    int totalNBoxes=1;
+    for(int i=0;i<this->nboxAtDim.size();i++)
+    {
+        totalNBoxes*=nboxAtDim[i];
+    }
+
+    this->totalNBoxes=totalNBoxes;
+    
+//ordered as follows: (0,0,0...), (1,0,0...)....(n,0,0)...(0,1,0), (1,1,0)... (n,1,0)... etc.
+    for(int i=0;i<totalNBoxes;i++)
+    {
+        vector<int> temp=getithCoordinate(i);
+        this->coords.push_back(new Pointint(temp));
+    }
+
+    for(int i=0;i<this->coords.size();i++)
+    {
+        Point *tempp=new Point(getCoordi(this->coords[i]));
+        
+        RectangleN *temp = new RectangleN(tempp, this->N, this->widths);
+        forest.push_back(new QuadTree(temp, minCoords, maxCoords, this->N, dim1, dim2));
+    }
+}
+
+vector<int> Forest::getithCoordinate(int i)
+{
+    vector<int> index;
+    //int product1=1;
+    //int product2=1;
+    for(int j=0;j<this->N;j++)
+    {
+        int product1=1;
+        int product2=1;
+        for(int z=0;z<=j;z++)
+        {
+            product1*=this->nboxAtDim[z];
+            if(z!=j)
+            {
+                product2*=this->nboxAtDim[z];
+            }
+        }
+        index.push_back((i%product1)/product2);
+    }
+    return index;
 }
 
 int Forest::index(int row, int col)
 {
-    return row * this->cols + col;
+    //return row * this->cols + col;
+    return 0;
 }
 
+/*
 QuadTree *Forest::get(int r, int c)
 {
     return this->forest[index(r, c)];
 }
-
+*/
+/*
 Point *Forest::getXYCoord(int r, int c)
 {
     double x = Forest::getCoordX(c);
@@ -40,33 +88,39 @@ Point *Forest::getXYCoord(int r, int c)
     Point *temp = new Point(x, y);
     return temp;
 }
-
-double Forest::getCoordX(int c)
+*/
+//first: which dimension, second: which coord in the dimension
+double Forest::getCoordi(int i, int j)
 {
-    return (double)c * width + this->minCoordX;
+    return (double)j * widths[i] + this->minCoords[i];
 }
 
-//double check!
-double Forest::getCoordY(int r)
+//returns the cartesian coordinates of the row, col coords 
+vector<double> Forest::getCoordi(Pointint* point)
 {
-    int totalHeight = abs(maxCoordY - minCoordY);
-    return ((totalHeight - r * height)) + minCoordY;
+    vector<double> temp;
+
+        for(int j=0;j<point->getDims();j++)
+        {
+            temp.push_back((double)point->getIthCoordinate(j) * widths[j] + this->minCoords[j]);
+        }
+    return temp;
 }
+
 
 /**
  * Divides the entire forest of trees according to the function F.
  **/
 void Forest::divide(Function *F, double tol)
 {
-    for (int r = 0; r < rows; r++)
+
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            forest[index(r, c)]->divideTree(minCoordX, maxCoordX, minCoordY, maxCoordY, F, tol, maximumLevel);
-        }
+        forest[i]->divideTree(F, tol, maximumLevel);
     }
 }
 
+/*
 int Forest::numMinCols()
 {
     return cols;
@@ -76,12 +130,16 @@ int Forest::numMinRows()
 {
     return rows;
 }
+*/
 
 //NOTE: IT RETURNS A POINT, BUT THE "POINT" CONTAINS INFORMATION ABOUT THE ROW AND COLUMN
+
+/*
 Point *Forest::getRC(double x, double y)
 {
     return new Point(findC(x), findR(y));
 }
+
 
 int Forest::findC(double x)
 {
@@ -91,6 +149,8 @@ int Forest::findR(double y)
 {
     return binarySearchY(y, 0, rows);
 }
+
+
 
 bool Forest::inRangeY(double y, int r)
 {
@@ -113,6 +173,8 @@ int Forest::inRangeX(double x, int c)
         return -1;
     }
 }
+
+
 
 int Forest::binarySearchX(double x, int lower, int upper)
 {
@@ -158,31 +220,46 @@ int Forest::binarySearchY(double y, int lower, int upper)
     return 0;
 }
 
+*/
+
 twoVects *Forest::getAllBoxes(Function *F, double cutoff)
 {
     //inboxes
-    vector<Rectangle *> v1;
-    vector<Rectangle *> v2;
+    vector<RectangleN *> v1;
+    vector<RectangleN *> v2;
     // vector<double> v3;
     //vector<double> difArray=getDifArray(F, cutoff);
     twoVects *temp = new twoVects(v1, v2);
 
     //temp->v3=v3;
 
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            QuadTree *te = this->forest[index(r, c)];
+            QuadTree *te = this->forest[i];
             twoVects *t = te->getAllBoxes(te->getRoot(), F, cutoff);
             temp->append(t);
-        }
     }
-
     return temp;
 }
 
-bool Forest::add(QuadTree *t, int r, int c)
+//get the lexographic coordinate from the (x,y,z...) coordinate
+int Forest::getLexCoord(Pointint* coord)
+{
+    int temp=0;
+    for(int i=0;i<this->N;i++)
+    {
+        int prod1=1;
+        for(int j=i;i>0;i--)
+        {
+        prod1*=this->nboxAtDim[i];
+        }
+        temp+=prod1*coord->getIthCoordinate(i);
+    }
+    return temp;
+}
+
+/*
+bool Forest::add(QuadTree *t, coords)
 {
     if (r >= rows || r < 0 || c >= cols || c < 0 || forest[index(r, c)] != nullptr)
     {
@@ -191,6 +268,7 @@ bool Forest::add(QuadTree *t, int r, int c)
     forest[index(r, c)] = t;
     return true;
 }
+*/
 
 void Forest::appendOutboxesToFile(ofstream *file, double cutoff, Function *F)
 {
@@ -234,41 +312,50 @@ void Forest::appendInboxesToFile(ofstream *file, double cutoff, Function *F)
     delete temp;
 }
 
-void Forest::draw(sf::RenderWindow *window)
+void Forest::draw(sf::RenderWindow *window, int dim1, int dim2)
 {
-    for (int r = 0; r < rows; r++)
+    for (int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
+        std::vector<int> temp=getithCoordinate(i);
+        bool te=true;
+        for(int j=0;j<this->N;j++)
         {
-            forest[index(r, c)]->draw(window);
+            if(j!=dim1&&j!=dim2&&temp[j]!=this->nboxAtDim[j]/2)
+            {
+                te=false;
+                break;
+            }
+        }
+        if(te==true)
+        {
+         forest[i]->draw(window, dim1, dim2);
         }
     }
 }
 
-QuadTree **Forest::getForest()
+vector<QuadTree*> Forest::getForest()
 {
-    return forest;
+    
+    return this->forest;
+    
 }
+
+
 
 void Forest::divideNthTimes(double minX, double maxX, double minY, double maxY, int level)
 {
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            forest[index(r, c)]->divideTreeNTimes(minX, maxX, minY, maxY, forest[index(r, c)]->getRoot(), level);
-        }
+        forest[i]->divideTreeNTimes(forest[i]->getRoot(), level);
     }
 }
 
-void Forest::divideComp(double tol, Function *F, int level)
+void Forest::divideComp(double tol, Function *F, int level, int dim1, int dim2)
 {
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            forest[index(r, c)]->divideCompMid(minCoordX, maxCoordX, minCoordY, maxCoordY, forest[index(r, c)]->getRoot(), F, tol, level);
-        }
+        //std::cout<<"he"<<i<<std::endl;
+        this->forest[i]->divideCompMid(this->minCoords, this->maxCoords, forest[i]->getRoot(), F, tol, level, dim1, dim2);
     }
 }
 //v2 inboxes
@@ -319,15 +406,12 @@ void Forest::appendAllBoxesToTwoFiles(ofstream *file, ofstream *file2, double cu
 vector<double> Forest::getDifArray(Function *F, double cutoff)
 {
     vector<double> temp;
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            vector<double> temp2;
-            QuadTree *te = forest[index(r, c)];
-            temp2 = te->getDifArray(te->getRoot(), F, cutoff);
-            temp.insert(temp.end(), temp2.begin(), temp2.end());
-        }
+        vector<double> temp2;
+        QuadTree *te = forest[i];
+        temp2 = te->getDifArray(te->getRoot(), F, cutoff);
+        temp.insert(temp.end(), temp2.begin(), temp2.end());
     }
     return temp;
 }
@@ -390,8 +474,8 @@ void Forest::appendAllFiles(ofstream *outboxes, ofstream *inboxes, ofstream *sup
 void Forest::appendEverythingToTwoFiles(ofstream *outbox, ofstream *inbox, Function *F, double cutoff)
 {
     tripleVect *temp = getAllRelevantVects(F, cutoff);
-    vector<Rectangle *> outboxes = temp->rect->v1;
-    vector<Rectangle *> inboxes = temp->rect->v2;
+    vector<RectangleN *> outboxes = temp->rect->v1;
+    vector<RectangleN *> inboxes = temp->rect->v2;
     vector<double> supply = temp->doub->v1;
     vector<double> demand = temp->doub->v2;
 
@@ -416,8 +500,8 @@ void Forest::appendEverythingToTwoFilesAcc(ofstream *outbox, ofstream *inbox, Fu
 {
     setprecision(15);
     tripleVect *temp = getAllRelevantVectsAcc(F, cutoff, accuracy, cutoffAcc);
-    vector<Rectangle *> outboxes = temp->rect->v1;
-    vector<Rectangle *> inboxes = temp->rect->v2;
+    vector<RectangleN *> outboxes = temp->rect->v1;
+    vector<RectangleN *> inboxes = temp->rect->v2;
     vector<double> supply = temp->doub->v1;
     vector<double> demand = temp->doub->v2;
 
@@ -440,156 +524,110 @@ void Forest::appendEverythingToTwoFilesAcc(ofstream *outbox, ofstream *inbox, Fu
 
 tripleVect *Forest::getAllRelevantVects(Function *F, double cutoff)
 {
-    vector<Rectangle *> t1;
-    vector<Rectangle *> t2;
+    vector<RectangleN *> t1;
+    vector<RectangleN *> t2;
     vector<double> t3;
     vector<double> t4;
     twoVects *temp1 = new twoVects(t1, t2);
     twoVectsDoub *temp2 = new twoVectsDoub(t3, t4);
     tripleVect *temp = new tripleVect(temp1, temp2);
-    for (int r = 0; r < rows; r++)
+
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            QuadTree *a = forest[index(r, c)];
+            QuadTree *a = forest[i];
             tripleVect *t = a->getAllRelevantVects(a->getRoot(), F, cutoff);
             temp->append(t);
-        }
     }
+
     return temp;
 }
 
 void Forest::normalize(Function *F)
 {
     double value = 0;
-    for (int r = 0; r < rows; r++)
+
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            value += forest[index(r, c)]->normalize(forest[index(r, c)]->getRoot(), F);
-        }
+            value += forest[i]->normalize(forest[i]->getRoot(), F);
     }
-    cout<<"lmaomalmao!!!!"<<value<<endl;
+
     F->normalize(1 / value);
 }
 
 void Forest::divideCompAcc(double tol, Function *F, int level, int accuracy)
 {
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            forest[index(r, c)]->divideCompMidAcc(minCoordX, maxCoordX, minCoordY, maxCoordY, forest[index(r, c)]->getRoot(), F, tol, level, accuracy);
-        }
+        forest[i]->divideCompMidAcc(forest[i]->getRoot(), F, tol, level, accuracy);
     }
 }
 
 tripleVect *Forest::getAllRelevantVectsAcc(Function *F, double cutoff, int accuracy, int cutoffAcc)
 {
-    vector<Rectangle *> t1;
-    vector<Rectangle *> t2;
+    vector<RectangleN *> t1;
+    vector<RectangleN *> t2;
     vector<double> t3;
     vector<double> t4;
     twoVects *temp1 = new twoVects(t1, t2);
     twoVectsDoub *temp2 = new twoVectsDoub(t3, t4);
     tripleVect *temp = new tripleVect(temp1, temp2);
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            QuadTree *a = forest[index(r, c)];
-            tripleVect *t = a->getAllRelevantVectsAcc(a->getRoot(), F, cutoff, accuracy, cutoffAcc);
-            temp->append(t);
-        }
+        QuadTree *a = forest[i];
+        tripleVect *t = a->getAllRelevantVectsAcc(a->getRoot(), F, cutoff, accuracy, cutoffAcc);
+        temp->append(t);
     }
+
     return temp;
 }
 void Forest::normalizeAcc(Function *F, int accuracy)
 {
     double value = 0;
-    for (int r = 0; r < rows; r++)
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            value += forest[index(r, c)]->normalizeAcc(forest[index(r, c)]->getRoot(), F, accuracy);
-        }
+        value += forest[i]->normalizeAcc(forest[i]->getRoot(), F, accuracy);
     }
     F->normalize(1 / value);
 }
 
+//check
 double Forest::getScaledCutoff(double cutoff)
 {
-    double area = this->width * this->height;
-    double xInt = this->maxCoordX - this->minCoordX;
-    double yInt = this->maxCoordY - this->minCoordY;
-    double areaComp = (xInt / 20) * (yInt / 20);
+
+    double vol=1;
+    for(int i=0;i<this->N;i++)
+    {
+        vol*=this->widths[i];
+    }
+    vector<double> intervals;
+    for(int i=0;i<this->N;i++)
+    {
+        intervals.push_back(this->maxCoords[i]-this->minCoords[i]);
+    }
+    double areaComp =  1;
+
+    for(int i=0;i<this->N;i++)
+    {
+        areaComp*=intervals[i]/20;
+    }
     //double difx=this->rows-20;
     //double dify=this->rows-20;
-    return cutoff / pow(areaComp / area, 3);
+    return cutoff / pow(areaComp / vol, this->N);
 }
 
 double Forest::getScaledCutOffMinSizeDif(int nboxes, double cutoff)
 {
-    std::cout << "THE CUTOFF:" << cutoff / ((nboxes/20)*(nboxes/20)) << std::endl;
         std::cout << "in CUTOFF:" << cutoff << std::endl;
         std::cout << "NBOX:" << nboxes << std::endl;
+        std::cout<<((nboxes/20)*(nboxes/20)) <<std::endl;
+    std::cout << "THE CUTOFF:" << cutoff / ((((double)nboxes)/20)*(((double)nboxes)/20)) << std::endl;
 
-    return cutoff / (((double)nboxes/10)*((double)nboxes/10));
-}
-
-tripleVect *Forest::getAllRelevantVectsGaussQuad(Function *F, double cutoff, int MAX_ITERATIONS, double acc, int m)
-{
-    GaussianQuadrature *gaussQuad = new GaussianQuadrature(m, m, acc, MAX_ITERATIONS);
-    vector<Rectangle *> t1;
-    vector<Rectangle *> t2;
-    vector<double> t3;
-    vector<double> t4;
-    twoVects *temp1 = new twoVects(t1, t2);
-    twoVectsDoub *temp2 = new twoVectsDoub(t3, t4);
-    tripleVect *temp = new tripleVect(temp1, temp2);
-    for (int r = 0; r < rows; r++)
-    {
-        for (int c = 0; c < cols; c++)
-        {
-            QuadTree *a = forest[index(r, c)];
-            tripleVect *t = a->getAllRelevantVectsGaussQuad(a->getRoot(), F, cutoff, MAX_ITERATIONS, gaussQuad);
-            temp->append(t);
-        }
-    }
-    return temp;
-}
-
-void Forest::appendEverythingToTwoFilesGaussQuad(ofstream *outbox, ofstream *inbox, Function *F, double cutoff, int MAX_ITERATIONS, double acc, int m, int PRECISION)
-{
-    tripleVect *temp = getAllRelevantVectsGaussQuad(F, cutoff, MAX_ITERATIONS, acc, m);
-    vector<Rectangle *> outboxes = temp->rect->v1;
-    vector<Rectangle *> inboxes = temp->rect->v2;
-    vector<double> supply = temp->doub->v1;
-    vector<double> demand = temp->doub->v2;
-    std::cout << "size" << supply.size() << std::endl;
-    std::cout << "size" << demand.size() << std::endl;
-
-    int i = 0;
-    for (int i = 0; i < inboxes.size(); i++)
-    {
-        *inbox << setprecision(PRECISION) << inboxes[i]->toStringCoord();
-        *inbox << "\t";
-        *inbox << demand[i];
-        *inbox << "\n";
-    }
-    for (int i = 0; i < outboxes.size(); i++)
-    {
-        *outbox << setprecision(PRECISION) << outboxes[i]->toStringCoord();
-        *outbox << "\t";
-        *outbox << supply[i];
-        *outbox << "\n";
-    }
+    return cutoff / (((double)nboxes/20)*((double)nboxes/20));
 }
 
 void Forest::appendCoordsCellsToFiles(ofstream *coords, int PRECISION)
 {
     vector<std::string> c=getAllCoords();
-    //std::cout<<c.size()<<std::endl;
     for(int i=0;i<c.size();i++)
     {
         *coords<<setprecision(PRECISION)<<c[i];
@@ -605,23 +643,24 @@ vector<std::string> Forest::getAllCoords()
 {
     vector<std::string> allCoords;
     int count=0;
-     for (int r = 0; r < rows; r++)
+
+    for(int i=0;i<this->totalNBoxes;i++)
     {
-        for (int c = 0; c < cols; c++)
-        {
-            QuadTree *a = forest[index(r, c)];
-            vector<std::string> temp=a->getStringCoordOfAllCells(a->getRoot());
-            if(temp.size()<2)
-            {
-                std::cout<<"WE EXIST"<<std::endl;
-            }
-            //std::cout<<"the size"<<temp.size()<<std::endl;
+        QuadTree *a = forest[i];
+        vector<std::string> temp=a->getStringCoordOfAllCells(a->getRoot());
             allCoords.insert(allCoords.end(), temp.begin(),temp.end());
-            //std::cout<<allCoords.size()<<std::endl;
             count++;
-            //std::cout<<"row"<<r<<std::endl;
-            //std::cout<<"col"<<c<<std::endl;
-        }
     }
+     
     return allCoords;
+}
+
+int Forest::getNumLeaves()
+{
+    int sum=0;
+    for(int i=0;i<this->totalNBoxes;i++)
+    {
+        sum+=this->forest[i]->getNumLeaves();
+    }
+    return sum;
 }

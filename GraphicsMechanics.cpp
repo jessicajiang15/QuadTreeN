@@ -1,24 +1,28 @@
 #include "GraphicsMechanics.h"
 
-Point *GraphicsMechanics::convertFromCartesian(double minX, double maxX, double minY, double maxY, Point *p)
+Point *GraphicsMechanics::convertFromCartesian(double minX, double maxX, double minY, double maxY, Point *p, int dim1, int dim2)
 {
     double intervalX = maxX - minX;
-    double xScale = WINDOW_WIDTH / intervalX;
+    double xScale = (double)WINDOW_WIDTH / intervalX;
     double intervalY = maxY - minY;
-    double yScale = WINDOW_HEIGHT / intervalY;
+    double yScale = (double)WINDOW_HEIGHT / intervalY;
     double xShiftCart = -minX;
     double xShiftSf = xShiftCart * xScale;
     double yShiftCart = -minY;
     double yShiftSf = yShiftCart * yScale;
-    double x = p->getX();
-    double y = p->getY();
+    double x = p->getIthCoordinate(dim1);
+    double y = p->getIthCoordinate(dim2);
     double newX = x * xScale + xShiftSf;
     double newY = (GraphicsMechanics::WINDOW_HEIGHT - (y * yScale)) - yShiftSf;
-    return new Point(newX, newY);
+    std::vector<double> point;
+    point.push_back(newX);
+    point.push_back(newY);
+    return new Point(point);
 }
 
 Point *GraphicsMechanics::convertToCartesian(double minX, double maxX, double minY, double maxY, Point *p)
 {
+    
     double intervalX = maxX - minX;
     double xScale = WINDOW_WIDTH / intervalX;
     double intervalY = maxY - minY;
@@ -27,14 +31,18 @@ Point *GraphicsMechanics::convertToCartesian(double minX, double maxX, double mi
     double xShiftSf = xShiftCart * xScale;
     double yShiftCart = intervalY / 2;
     double yShiftSf = yShiftCart * yScale;
-    double x = p->getX();
-    double y = p->getY();
+    double x = p->getIthCoordinate(0);
+    double y = p->getIthCoordinate(1);
     double newX = (x - xShiftSf) / xScale;
     double newY = -(y + yShiftSf - GraphicsMechanics::WINDOW_HEIGHT) / yScale;
     //    double newY = GraphicsMechanics::WINDOW_HEIGHT-(y*yScale)-yShiftSf;
     //convertY(F(midX)*Main.scale)-Main.yShift
     //convertY -> main.height-y
-    return new Point(newX, newY);
+    std::vector<double> point;
+    point.push_back(newX);
+    point.push_back(newY);
+    return new Point(point);
+    
 }
 
 double GraphicsMechanics::getXScale(double minX, double maxX)

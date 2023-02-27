@@ -18,8 +18,6 @@ GaussianQuadrature::GaussianQuadrature(int n, int m, double acc, int MAX_ITERATI
     this->m = m;
     this->NWeightsAndAbscissae = initializeWeightsAndAbscissae(MAX_ITERATIONS, n);
     this->MWeightsAndAbscissae = initializeWeightsAndAbscissae(MAX_ITERATIONS, m);
-        //std::cout<<NWeightsAndAbscissae->v1.size()<<std::endl;
-        //std::cout<<NWeightsAndAbscissae->v2.size()<<std::endl;
 
 }
 

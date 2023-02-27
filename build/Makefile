@@ -57,10 +57,10 @@ RM = /usr/local/Cellar/cmake/3.24.2/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/Jessica/git/QuadTree
+CMAKE_SOURCE_DIR = /Users/Jessica/git/QuadTreeN
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/Jessica/git/QuadTree/build
+CMAKE_BINARY_DIR = /Users/Jessica/git/QuadTreeN/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -78,7 +78,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	/usr/local/Cellar/cmake/3.24.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/Jessica/git/QuadTree/build/CPackSourceConfig.cmake
+	/usr/local/Cellar/cmake/3.24.2/bin/cpack --config ./CPackSourceConfig.cmake /Users/Jessica/git/QuadTreeN/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -107,9 +107,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Jessica/git/QuadTree/build/CMakeFiles /Users/Jessica/git/QuadTree/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Jessica/git/QuadTreeN/build/CMakeFiles /Users/Jessica/git/QuadTreeN/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Jessica/git/QuadTree/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Jessica/git/QuadTreeN/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -245,29 +245,29 @@ Gaussian.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Gaussian.cpp.s
 .PHONY : Gaussian.cpp.s
 
-GaussianQuadrature.o: GaussianQuadrature.cpp.o
-.PHONY : GaussianQuadrature.o
+GaussianN.o: GaussianN.cpp.o
+.PHONY : GaussianN.o
 
 # target to build an object file
-GaussianQuadrature.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GaussianQuadrature.cpp.o
-.PHONY : GaussianQuadrature.cpp.o
+GaussianN.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GaussianN.cpp.o
+.PHONY : GaussianN.cpp.o
 
-GaussianQuadrature.i: GaussianQuadrature.cpp.i
-.PHONY : GaussianQuadrature.i
+GaussianN.i: GaussianN.cpp.i
+.PHONY : GaussianN.i
 
 # target to preprocess a source file
-GaussianQuadrature.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GaussianQuadrature.cpp.i
-.PHONY : GaussianQuadrature.cpp.i
+GaussianN.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GaussianN.cpp.i
+.PHONY : GaussianN.cpp.i
 
-GaussianQuadrature.s: GaussianQuadrature.cpp.s
-.PHONY : GaussianQuadrature.s
+GaussianN.s: GaussianN.cpp.s
+.PHONY : GaussianN.s
 
 # target to generate assembly for a file
-GaussianQuadrature.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GaussianQuadrature.cpp.s
-.PHONY : GaussianQuadrature.cpp.s
+GaussianN.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GaussianN.cpp.s
+.PHONY : GaussianN.cpp.s
 
 GraphicsMechanics.o: GraphicsMechanics.cpp.o
 .PHONY : GraphicsMechanics.o
@@ -389,6 +389,30 @@ Point.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Point.cpp.s
 .PHONY : Point.cpp.s
 
+Pointint.o: Pointint.cpp.o
+.PHONY : Pointint.o
+
+# target to build an object file
+Pointint.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Pointint.cpp.o
+.PHONY : Pointint.cpp.o
+
+Pointint.i: Pointint.cpp.i
+.PHONY : Pointint.i
+
+# target to preprocess a source file
+Pointint.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Pointint.cpp.i
+.PHONY : Pointint.cpp.i
+
+Pointint.s: Pointint.cpp.s
+.PHONY : Pointint.s
+
+# target to generate assembly for a file
+Pointint.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Pointint.cpp.s
+.PHONY : Pointint.cpp.s
+
 QuadTree.o: QuadTree.cpp.o
 .PHONY : QuadTree.o
 
@@ -413,53 +437,29 @@ QuadTree.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/QuadTree.cpp.s
 .PHONY : QuadTree.cpp.s
 
-Rectangle.o: Rectangle.cpp.o
-.PHONY : Rectangle.o
+RectangleN.o: RectangleN.cpp.o
+.PHONY : RectangleN.o
 
 # target to build an object file
-Rectangle.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Rectangle.cpp.o
-.PHONY : Rectangle.cpp.o
+RectangleN.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/RectangleN.cpp.o
+.PHONY : RectangleN.cpp.o
 
-Rectangle.i: Rectangle.cpp.i
-.PHONY : Rectangle.i
-
-# target to preprocess a source file
-Rectangle.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Rectangle.cpp.i
-.PHONY : Rectangle.cpp.i
-
-Rectangle.s: Rectangle.cpp.s
-.PHONY : Rectangle.s
-
-# target to generate assembly for a file
-Rectangle.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Rectangle.cpp.s
-.PHONY : Rectangle.cpp.s
-
-Square.o: Square.cpp.o
-.PHONY : Square.o
-
-# target to build an object file
-Square.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Square.cpp.o
-.PHONY : Square.cpp.o
-
-Square.i: Square.cpp.i
-.PHONY : Square.i
+RectangleN.i: RectangleN.cpp.i
+.PHONY : RectangleN.i
 
 # target to preprocess a source file
-Square.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Square.cpp.i
-.PHONY : Square.cpp.i
+RectangleN.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/RectangleN.cpp.i
+.PHONY : RectangleN.cpp.i
 
-Square.s: Square.cpp.s
-.PHONY : Square.s
+RectangleN.s: RectangleN.cpp.s
+.PHONY : RectangleN.s
 
 # target to generate assembly for a file
-Square.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/Square.cpp.s
-.PHONY : Square.cpp.s
+RectangleN.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/RectangleN.cpp.s
+.PHONY : RectangleN.cpp.s
 
 Test2DExpFcn.o: Test2DExpFcn.cpp.o
 .PHONY : Test2DExpFcn.o
@@ -628,9 +628,9 @@ help:
 	@echo "... Gaussian.o"
 	@echo "... Gaussian.i"
 	@echo "... Gaussian.s"
-	@echo "... GaussianQuadrature.o"
-	@echo "... GaussianQuadrature.i"
-	@echo "... GaussianQuadrature.s"
+	@echo "... GaussianN.o"
+	@echo "... GaussianN.i"
+	@echo "... GaussianN.s"
 	@echo "... GraphicsMechanics.o"
 	@echo "... GraphicsMechanics.i"
 	@echo "... GraphicsMechanics.s"
@@ -646,15 +646,15 @@ help:
 	@echo "... Point.o"
 	@echo "... Point.i"
 	@echo "... Point.s"
+	@echo "... Pointint.o"
+	@echo "... Pointint.i"
+	@echo "... Pointint.s"
 	@echo "... QuadTree.o"
 	@echo "... QuadTree.i"
 	@echo "... QuadTree.s"
-	@echo "... Rectangle.o"
-	@echo "... Rectangle.i"
-	@echo "... Rectangle.s"
-	@echo "... Square.o"
-	@echo "... Square.i"
-	@echo "... Square.s"
+	@echo "... RectangleN.o"
+	@echo "... RectangleN.i"
+	@echo "... RectangleN.s"
 	@echo "... Test2DExpFcn.o"
 	@echo "... Test2DExpFcn.i"
 	@echo "... Test2DExpFcn.s"

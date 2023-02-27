@@ -1,6 +1,6 @@
 CMakeFiles/QuadTree.dir/LegendrePolynomial.cpp.o: \
-  /Users/Jessica/git/QuadTree/LegendrePolynomial.cpp \
-  /Users/Jessica/git/QuadTree/LegendrePolynomial.h \
+  /Users/Jessica/git/QuadTreeN/LegendrePolynomial.cpp \
+  /Users/Jessica/git/QuadTreeN/LegendrePolynomial.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \

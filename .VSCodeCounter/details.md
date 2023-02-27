@@ -21,8 +21,8 @@ Total : 57 files,  7697 codes, 664 comments, 620 blanks, all 8981 lines
 | [Point.h](/Point.h) | C++ | 13 | 1 | 2 | 16 |
 | [QuadTree.cpp](/QuadTree.cpp) | C++ | 211 | 7 | 25 | 243 |
 | [QuadTree.h](/QuadTree.h) | C++ | 35 | 87 | 7 | 129 |
-| [Rectangle.cpp](/Rectangle.cpp) | C++ | 59 | 3 | 12 | 74 |
-| [Rectangle.h](/Rectangle.h) | C++ | 31 | 51 | 4 | 86 |
+| [RectangleN.cpp](/RectangleN.cpp) | C++ | 59 | 3 | 12 | 74 |
+| [RectangleN.h](/RectangleN.h) | C++ | 31 | 51 | 4 | 86 |
 | [Square.cpp](/Square.cpp) | C++ | 4 | 1 | 1 | 6 |
 | [Square.h](/Square.h) | C++ | 9 | 2 | 4 | 15 |
 | [build/.cmake/api/v1/query/client-vscode/query.json](/build/.cmake/api/v1/query/client-vscode/query.json) | JSON | 1 | 0 | 0 | 1 |

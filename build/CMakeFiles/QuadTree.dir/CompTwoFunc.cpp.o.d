@@ -1,7 +1,7 @@
 CMakeFiles/QuadTree.dir/CompTwoFunc.cpp.o: \
-  /Users/Jessica/git/QuadTree/CompTwoFunc.cpp \
-  /Users/Jessica/git/QuadTree/CompTwoFunc.h \
-  /Users/Jessica/git/QuadTree/Function.h \
+  /Users/Jessica/git/QuadTreeN/CompTwoFunc.cpp \
+  /Users/Jessica/git/QuadTreeN/CompTwoFunc.h \
+  /Users/Jessica/git/QuadTreeN/Function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \

@@ -1,7 +1,7 @@
-CMakeFiles/QuadTree.dir/Rectangle.cpp.o: \
-  /Users/Jessica/git/QuadTree/Rectangle.cpp \
+CMakeFiles/QuadTree.dir/RectangleN.cpp.o: \
+  /Users/Jessica/git/QuadTree/RectangleN.cpp \
   /Users/Jessica/git/QuadTree/Square.h \
-  /Users/Jessica/git/QuadTree/Rectangle.h \
+  /Users/Jessica/git/QuadTree/RectangleN.h \
   /Users/Jessica/git/QuadTree/Point.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
@@ -298,7 +298,7 @@ CMakeFiles/QuadTree.dir/Rectangle.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__tree \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__node_handle \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/optional \
-  /usr/local/include/SFML/Graphics/RectangleShape.hpp \
+  /usr/local/include/SFML/Graphics/RectangleNShape.hpp \
   /usr/local/include/SFML/Graphics/RenderTarget.hpp \
   /usr/local/include/SFML/Graphics/View.hpp \
   /usr/local/include/SFML/Graphics/RenderTexture.hpp \

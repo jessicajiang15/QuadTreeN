@@ -1,6 +1,6 @@
 CMakeFiles/QuadTree.dir/Function.cpp.o: \
-  /Users/Jessica/git/QuadTree/Function.cpp \
-  /Users/Jessica/git/QuadTree/Function.h \
+  /Users/Jessica/git/QuadTreeN/Function.cpp \
+  /Users/Jessica/git/QuadTreeN/Function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \

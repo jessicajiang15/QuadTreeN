@@ -1,7 +1,7 @@
 #ifndef _TRIPLEVECT_H
 #define _TRIPLEVECT_H
 #include <vector>
-#include "Rectangle.h"
+#include "RectangleN.h"
 #include "twoVects.h"
 #include "twoVectsDoub.h"
 
@@ -17,12 +17,12 @@ class tripleVect
      **/
     tripleVect(twoVects *rect, twoVectsDoub *doub);
     /**
-     * A twoVects object storing two vectors of rectangles representing outboxes and inboxes. The first 
+     * A twoVects object storing two vectors of RectangleNs representing outboxes and inboxes. The first 
      * vector is the outboxes list and the second is the inboxes.
      * */
     twoVects *rect;
     /**
-     * A twoVects object storing 2 vectors of rectangles representing the supply and demand lists. The first
+     * A twoVects object storing 2 vectors of RectangleNs representing the supply and demand lists. The first
      * vector is the supply and the second is the demand.
     **/
     twoVectsDoub *doub;

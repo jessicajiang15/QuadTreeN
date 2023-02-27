@@ -1,7 +1,7 @@
 CMakeFiles/QuadTree.dir/GaussianQuadrature.cpp.o: \
-  /Users/Jessica/git/QuadTree/GaussianQuadrature.cpp \
-  /Users/Jessica/git/QuadTree/GaussianQuadrature.h \
-  /Users/Jessica/git/QuadTree/twoVectsDoub.h \
+  /Users/Jessica/git/QuadTreeN/GaussianQuadrature.cpp \
+  /Users/Jessica/git/QuadTreeN/GaussianQuadrature.h \
+  /Users/Jessica/git/QuadTreeN/twoVectsDoub.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \
@@ -163,7 +163,7 @@ CMakeFiles/QuadTree.dir/GaussianQuadrature.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/Jessica/git/QuadTree/LegendrePolynomial.h \
+  /Users/Jessica/git/QuadTreeN/LegendrePolynomial.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iostream \
@@ -231,8 +231,8 @@ CMakeFiles/QuadTree.dir/GaussianQuadrature.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/bitset \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iomanip \
-  /Users/Jessica/git/QuadTree/Function.h \
-  /Users/Jessica/git/QuadTree/OneDFunction.h \
+  /Users/Jessica/git/QuadTreeN/Function.h \
+  /Users/Jessica/git/QuadTreeN/OneDFunction.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stack \

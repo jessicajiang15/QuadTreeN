@@ -48,8 +48,8 @@ Files
 | /Users/Jessica/git/QuadTree/Point.h                                                                                | C++          |         13 |          1 |          2 |         16 |
 | /Users/Jessica/git/QuadTree/QuadTree.cpp                                                                           | C++          |        211 |          7 |         25 |        243 |
 | /Users/Jessica/git/QuadTree/QuadTree.h                                                                             | C++          |         35 |         87 |          7 |        129 |
-| /Users/Jessica/git/QuadTree/Rectangle.cpp                                                                          | C++          |         59 |          3 |         12 |         74 |
-| /Users/Jessica/git/QuadTree/Rectangle.h                                                                            | C++          |         31 |         51 |          4 |         86 |
+| /Users/Jessica/git/QuadTree/RectangleN.cpp                                                                          | C++          |         59 |          3 |         12 |         74 |
+| /Users/Jessica/git/QuadTree/RectangleN.h                                                                            | C++          |         31 |         51 |          4 |         86 |
 | /Users/Jessica/git/QuadTree/Square.cpp                                                                             | C++          |          4 |          1 |          1 |          6 |
 | /Users/Jessica/git/QuadTree/Square.h                                                                               | C++          |          9 |          2 |          4 |         15 |
 | /Users/Jessica/git/QuadTree/build/.cmake/api/v1/query/client-vscode/query.json                                     | JSON         |          1 |          0 |          0 |          1 |

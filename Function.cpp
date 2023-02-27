@@ -26,7 +26,7 @@ double Function::integrate(double xi, double xf, double yi, double yf)
 }
 
 
-double Function::value(double x, double y)
+double Function::value(std::vector<double> values)
 {
     return 0;
 }

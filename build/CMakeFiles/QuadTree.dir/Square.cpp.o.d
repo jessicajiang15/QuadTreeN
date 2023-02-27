@@ -1,8 +1,8 @@
 CMakeFiles/QuadTree.dir/Square.cpp.o: \
-  /Users/Jessica/git/QuadTree/Square.cpp \
-  /Users/Jessica/git/QuadTree/Square.h \
-  /Users/Jessica/git/QuadTree/Rectangle.h \
-  /Users/Jessica/git/QuadTree/Point.h \
+  /Users/Jessica/git/QuadTreeN/Square.cpp \
+  /Users/Jessica/git/QuadTreeN/Square.h \
+  /Users/Jessica/git/QuadTreeN/RectangleN.h \
+  /Users/Jessica/git/QuadTreeN/Point.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \
@@ -166,7 +166,7 @@ CMakeFiles/QuadTree.dir/Square.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/assert.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/Jessica/git/QuadTree/Function.h \
+  /Users/Jessica/git/QuadTreeN/Function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string_view \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__string \
@@ -309,7 +309,7 @@ CMakeFiles/QuadTree.dir/Square.cpp.o: \
   /usr/local/include/SFML/Graphics/Sprite.hpp \
   /usr/local/include/SFML/Graphics/Text.hpp \
   /usr/local/include/SFML/Graphics/VertexBuffer.hpp \
-  /Users/Jessica/git/QuadTree/GraphicsMechanics.h \
+  /Users/Jessica/git/QuadTreeN/GraphicsMechanics.h \
   /usr/local/include/SFML/Audio.hpp \
   /usr/local/include/SFML/Audio/InputSoundFile.hpp \
   /usr/local/include/SFML/Audio/Export.hpp \
@@ -328,11 +328,11 @@ CMakeFiles/QuadTree.dir/Square.cpp.o: \
   /usr/local/include/SFML/Audio/SoundFileFactory.inl \
   /usr/local/include/SFML/Audio/SoundFileReader.hpp \
   /usr/local/include/SFML/Audio/SoundFileWriter.hpp \
-  /Users/Jessica/git/QuadTree/GaussianQuadrature.h \
-  /Users/Jessica/git/QuadTree/twoVectsDoub.h \
-  /Users/Jessica/git/QuadTree/LegendrePolynomial.h \
+  /Users/Jessica/git/QuadTreeN/GaussianQuadrature.h \
+  /Users/Jessica/git/QuadTreeN/twoVectsDoub.h \
+  /Users/Jessica/git/QuadTreeN/LegendrePolynomial.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iomanip \
-  /Users/Jessica/git/QuadTree/OneDFunction.h \
+  /Users/Jessica/git/QuadTreeN/OneDFunction.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/filesystem \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/stack \

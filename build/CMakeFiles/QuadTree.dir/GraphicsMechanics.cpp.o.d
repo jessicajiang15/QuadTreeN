@@ -1,6 +1,6 @@
 CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.o: \
-  /Users/Jessica/git/QuadTree/GraphicsMechanics.cpp \
-  /Users/Jessica/git/QuadTree/GraphicsMechanics.h \
+  /Users/Jessica/git/QuadTreeN/GraphicsMechanics.cpp \
+  /Users/Jessica/git/QuadTreeN/GraphicsMechanics.h \
   /usr/local/include/SFML/Graphics.hpp \
   /usr/local/include/SFML/Window.hpp /usr/local/include/SFML/System.hpp \
   /usr/local/include/SFML/Config.hpp \
@@ -322,6 +322,6 @@ CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.o: \
   /usr/local/include/SFML/Audio/SoundFileWriter.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/istream \
-  /Users/Jessica/git/QuadTree/Point.h \
+  /Users/Jessica/git/QuadTreeN/Point.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/math.h

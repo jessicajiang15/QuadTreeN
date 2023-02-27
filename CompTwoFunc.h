@@ -12,7 +12,7 @@ class CompTwoFunc : public Function
 
     public:
     CompTwoFunc(Function *initial, Function *final);
-    double value(double x, double y) override;
+    double value(std::vector<double> values) override;
 };
 
 #endif

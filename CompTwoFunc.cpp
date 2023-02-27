@@ -7,7 +7,7 @@
 
     }
 
-    double CompTwoFunc::value(double x, double y)
+    double CompTwoFunc::value(std::vector<double> values)
     {
-        return (initial->value(x, y)-final->value(x, y));
+        return (initial->value(values)-final->value(values));
     }

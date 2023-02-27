@@ -2,6 +2,7 @@
 #define _FOREST_H 1
 #include "QuadTree.h"
 #include <fstream>
+#include "Pointint.h"
 
 class Forest
 {
@@ -11,41 +12,27 @@ private:
     * For index access, DO NOT use double brackets– use the provided index(r, c) function
     * as it is allocated as a single array on the heap.
     **/
-    QuadTree **forest;
+    //QuadTree **forest;
+
+    vector<QuadTree*> forest;
+    vector<Pointint*> coords;
     /**
      * Number of rows in the 2D array.
      * This is NOT the number of rows after the tree has divided–
      * this is the starting number of rows in the forest.
      **/
-    int rows;
-    /**
-     * Starting number of columns in the 2D array.
-     **/
-    int cols;
-    /**
-     * The minimum Y coordinate this forest spans to.
-    */
-    double minCoordY;
-    /**
-     * The minimum X coordinate this forest spans to.
-    */
-    double minCoordX;
-    /**
-     * The maximum Y coordinate this forest spans to.
-    */
-    double maxCoordY;
-    /**
-     * The maximum X coordinate this forest spans to.
-    */
-    double maxCoordX;
-    /**
-     * STARTING width of each cell. Stored for convenience.
-    */
-    double width;
-    /**
-     * Starting height of each cell. Stored for convenience.
-    */
-    double height;
+    vector<int> nboxAtDim;
+
+    vector<double> minCoords;
+
+    vector<double> maxCoords;
+
+    vector<double> widths;
+
+    int totalNBoxes;
+
+    int getLexCoord(Pointint* coord);
+    
     /**
      * Helper function to determine if a given x value is covered by a cell at column c.
      * Necessary for determining which cell a given x, y coordinate falls in.
@@ -60,12 +47,12 @@ private:
     /**
      * Obtains the cartesian y coordinate of a given row r.
      **/
-    double getCoordY(int r);
-    /**
-     * Obtains the cartesian x coordinate of a given col c.
-     **/
-    double getCoordX(int c);
+    double getCoordi(int i, int j);
+    
     int maximumLevel;
+
+    //dimensions
+    int N;
 
 public:
     /**
@@ -73,27 +60,33 @@ public:
  **/
     virtual ~Forest()
     {
-        delete forest;
+
     }
     /**
      * Constructor that creates a new forest an already initialized 2D array of QuadTrees.
      * Not sure when this might be used, but it's included just in case.
      **/
-    Forest(QuadTree **forest);
+    Forest(vector<QuadTree*> forest, vector<Pointint*> points);
     /**
      * Constructor that creates a new forest from the parameters.
      **/
-    Forest(int row, int col, double minCoordX, double maxCoordX, double minCoordY, double maxCoordY);
+    Forest(vector<int> nboxAtDim, vector<double> minCoords, vector<double> maxCoords,int dim1, int dim2);
     /**
      * Retrieves the QuadTree at the given array indicies
      **/
-    QuadTree *get(int r, int c);
+    QuadTree *get(vector<int> nboxAtDim);
+
+    //retrieves the n dimensional coord from the lexiographically ordered index i
+    vector<int> getithCoordinate(int i);
     /**
      * Retrieves the corresponding cell given cartesian x, y coordinates
      * @return a point object containing the cell row and the cell col as its indicies
      * THIS DOES NOT RETURN A CARTESIAN POINT. IT IS JUST A WAY TO RETURN BOTH THE ROW AND COL
      * IN THE SAME FUNCTION.
      **/
+
+    vector<double> getCoordi(Pointint* point);
+    //no need
     Point *getRC(double x, double y);
     /**
      * Adds a QuadTree to the cell with indicies r, c.
@@ -159,8 +152,8 @@ public:
     twoVects *getAllBoxes(Function *F, double cutoff);
     void appendOutboxesToFile(ofstream *file, double cutoff, Function *F);
     void appendInboxesToFile(ofstream *file, double cutoff, Function *F);
-    void draw(sf::RenderWindow *);
-    QuadTree **getForest();
+    void draw(sf::RenderWindow *, int dim1, int dim2);
+    vector<QuadTree*> getForest();
     /**
      * Helper function intended to help access a cell at index r, c in the forest, as the forest
      * is allocated as a single 1D array.
@@ -169,13 +162,13 @@ public:
     //void divideTreeNTimes(double minX, double maxX, double minY, double maxY, Node *n, int level);
     void divideNthTimes(double minX, double maxX, double minY, double maxY, int level);
     /**
-     * Divides the tree using the less accurate approx() in Rectangle and the volume comparison method
+     * Divides the tree using the less accurate approx() in RectangleN and the volume comparison method
      * @param tol the maximum allowed difference between the sum of the midpoint riemann rectangular prism 
-     * volumes of the subdivided rectangles and the mid point riemann rectangular prism volume
+     * volumes of the subdivided RectangleNs and the mid point riemann rectangular prism volume
      * @param F the function we are dividing the grid based on
      * @param level the maximum level that we are dividing to
      * */
-    void divideComp(double tol, Function *F, int level);
+    void divideComp(double tol, Function *F, int level, int dim1, int dim2);
     /**
      * Appends both inboxes and outboxes to two files. Note that this method is currently unused, but if
      * for some reason you ONLY want the inboxes and outboxes, then inboxes -> file1 outboxes->file2
@@ -248,10 +241,10 @@ public:
      * */
     void normalize(Function *F);
     /**
-     * Divides the tree using the more accurate getAccurateApprox() in Rectangle and the volume comparison 
+     * Divides the tree using the more accurate getAccurateApprox() in RectangleN and the volume comparison 
      * method.
      * @param tol the maximum allowed difference between the sum of the midpoint riemann rectangular prism 
-     * volumes of the subdivided rectangles and the mid point riemann rectangular prism volume
+     * volumes of the subdivided RectangleNs and the mid point riemann rectangular prism volume
      * @param F the function we are dividing the grid based on
      * @param level the maximum level that we are dividing to
      * @param accuracy the accuracy of the integral that we are using for comparison. 
@@ -284,11 +277,14 @@ public:
     double getScaledCutoff(double cutoff);
     double getScaledCutOffMinSizeDif(int NBOXES, double cutoff);
 
-    tripleVect* getAllRelevantVectsGaussQuad(Function *F, double cutoff, int MAX_ITERATIONS, double acc, int m);
+   // tripleVect* getAllRelevantVectsGaussQuad(Function *F, double cutoff, int MAX_ITERATIONS, double acc, int m);
 
-    void appendEverythingToTwoFilesGaussQuad(ofstream *outbox, ofstream *inbox, Function *F, double cutoff, int MAX_ITERATIONS, double acc, int m, int PRECISION);
+    //void appendEverythingToTwoFilesGaussQuad(ofstream *outbox, ofstream *inbox, Function *F, double cutoff, int MAX_ITERATIONS, double acc, int m, int PRECISION);
     void appendCoordsCellsToFiles(ofstream *coords, int PRECISION);
     vector<std::string> getAllCoords();
+    int getNumLeaves();
+
+    //vector<QuadTree*> getForest();
 
 
 };

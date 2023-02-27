@@ -1,22 +1,25 @@
 #include "Node.h"
 //Node of a tree, .cpp
-Node::Node(Rectangle *s)
+Node::Node(RectangleN *s)
 {
     this->orientation=0;
     this->square = s;
     Node::allNullESq();
     level = 0;
-        this->hasChildren=false;
+    this->hasChildren=false;
+    this->N=this->square->getN();
+    this->numChildren=pow(2, N);
 }
 
-Node::Node(double x, double y, Node *parent, double width, double height, int orientation, int level)
+Node::Node(Point *corner, Node *parent, std::vector<double> widths, int orientation, int level, int N)
 {
-    Rectangle *temp = new Rectangle(x, y, width, height);
+    RectangleN *temp = new RectangleN(corner, N, widths);
     this->square = temp;
     this->orientation=orientation;
     this->level = level;
     this->hasChildren=false;
-
+    this->numChildren=pow(2, N);
+    this->N=N;
 }
 
 bool Node::isLeaf()
@@ -32,26 +35,27 @@ Node *Node::getParent()
 void Node::createChildren()
 {
     //double x, double y, Node *parent, vector<Node *> siblings, double width, double height
-    double width = square->getWidth();
-    double height = square->getHeight();
-    double y = square->getY();
-    double x = square->getX();
-    this->nw = new Node(x, y, this, width / 2, height / 2, 1, this->level + 1);
-    this->ne = new Node(x + width / 2, y, this, width / 2, height / 2, 2, this->level + 1);
-    this->se = new Node(x + width / 2, y - height / 2, this, width / 2, height / 2, 3, this->level + 1);
-    this->sw = new Node(x, y - height / 2, this, width / 2, height / 2, 4, this->level + 1);
+
+    for(int i=0;i<this->numChildren;i++)
+    {
+        std::vector<double> temp;
+        std::vector<double> lengths;
+        for(int j=0;j<this->N;j++)
+        {
+            double coord=this->square->getPoint()->getIthCoordinate(j);
+            temp.push_back(i&pow(2,j)==1?coord+this->square->getithInterval(j)/2: coord);
+            lengths[j]=this->square->getithInterval(j)/2;
+        }
+        Point* corner=new Point(temp);
+        children[i]=new Node(corner, this, lengths, 1, this->level + 1, this->N);
+    }
     this->square = nullptr;
-    hasChildren=true;
+    this->hasChildren=true;
 }
 
 vector<Node *> Node::getChildren()
 {
-    vector<Node *> temp;
-    temp.push_back(this->nw);
-    temp.push_back(this->ne);
-    temp.push_back(this->sw);
-    temp.push_back(this->se);
-    return temp;
+    return children;
 }
 
 int Node::getRelativeOrientation()
@@ -62,16 +66,12 @@ int Node::getRelativeOrientation()
 void Node::allNullESq()
 {
     this->p = nullptr;
-    this->ne = nullptr;
-    this->nw = nullptr;
-    this->se = nullptr;
-    this->sw = nullptr;
+    for(int i=0;i<this->N;i++)
+    {
+        this->children[i]=nullptr;
+    }
 }
 
-void Node::setSquare(Square *s)
-{
-    this->square = s;
-}
 
 double Node::integrate(Function *F)
 {
@@ -82,7 +82,7 @@ double Node::integrate(Function *F)
     return square->integrate(F);
 }
 
-Rectangle *Node::getRekt()
+RectangleN *Node::getRekt()
 {
     return square;
 }
@@ -94,29 +94,53 @@ int Node::getLevel()
 
 vector<Node*> Node::createFakeChildren()
 {
-    double width = square->getWidth();
-    double height = square->getHeight();
-    double y = square->getY();
-    double x = square->getX();
-    vector<Node*> temp;
-    Node *nwt = new Node(x, y, this, width / 2, height / 2, 1, this->level + 1);
-    Node *net = new Node(x + width / 2, y, this, width / 2, height / 2, 2, this->level + 1);
-    Node *set = new Node(x + width / 2, y - height / 2, this, width / 2, height / 2, 3, this->level + 1);
-    Node *swt = new Node(x, y - height / 2, this, width / 2, height / 2, 4, this->level + 1);
-    temp.push_back(nwt);
-    temp.push_back(net);
-    temp.push_back(set);
-    temp.push_back(swt);
-    return temp;
+    std::vector<Node*> temp1;
+    for(int i=0;i<this->numChildren;i++)
+    {
+        //creating one child
+        std::vector<double> temp;
+        std::vector<double> lengths;
+        for(int j=0;j<this->N;j++)
+        {
+            double coord=this->square->getPoint()->getIthCoordinate(j);
+            //i is the 0000 0001 etc
+            //2^j is 0001 0010
+            int t=(i&(int)pow(2,j))>>j;
+            temp.push_back((t==1)?coord+this->square->getithInterval(j)/2: coord);
+            lengths.push_back(this->square->getithInterval(j)/2);
+        }
+        Point* corner=new Point(temp);
+        Node* tee=new Node(corner, this, lengths, i, this->level + 1, this->N);
+        temp1.push_back(tee);
+    }
+    return temp1;
 }
 
 //    void createChildren(vector<Node*> children);
 void Node::createChildren(vector<Node*> children)
 {
-    this->nw=children[0];
-    this->ne=children[1];
-    this->se=children[2];
-    this->sw=children[3];
-    hasChildren=true;
+    this->children=children;
+    this->hasChildren=true;
     this->square=nullptr;
+}
+
+bool Node::hasChildrenf()
+{
+    return this->hasChildren;
+}
+int Node::getNumLeaves(Node* temp, int i)
+{
+    if(temp->isLeaf())
+    {
+        return 1;
+    }
+    else
+    {
+        int sum=0;
+        for(int i=0;i<this->getChildren().size();i++)
+        {
+            sum+=getNumLeaves(this->getChildren()[i], i);
+        }
+        return sum;
+    }
 }
