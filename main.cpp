@@ -7,7 +7,6 @@
 #include "Test2DExpFcn.h"
 #include "GaussianN.h"
 
-
 //define everything as a floating point
 
 /** 
@@ -15,13 +14,13 @@
  * */
 
 //how many dimensions do u have
-#define DIMS 4
+#define DIMS 3
 
 //Nboxes^N total boxes
-#define NBOXES 10
+#define NBOXES 11
 
-#define DRAW_DIM_1 0
-#define DRAW_DIM_2 1
+#define DRAW_DIM_1 1
+#define DRAW_DIM_2 2
 /**
  * Parameters of the gaussian functions
  * Gives an initial gaussian of the form AINIT*E^[-(x-X1)^2-(y-Y1)^2/RHO^2]
@@ -81,6 +80,7 @@ double acc=ACC;
 double p=P;
 double rho=RHO;
 double theta=THETA;
+int dims=4;
 
 int themin=-5;
 
@@ -91,11 +91,19 @@ vector<double> displacements;
 double x1=X1;
 double y_1=Y1;
 
+    std::vector<double> mins;
+
+    std::vector<double> maxes;
+
+    std::vector<int> nboxesList;
+    
 void appendDataToFile(ofstream *file);
 
 void defineAllConstants(ifstream *file);
 
 void defineAllConstantsNoRead();
+
+
 
 
 
@@ -111,11 +119,6 @@ int main()
     double min;
     double max;
 
-    std::vector<double> mins;
-
-    std::vector<double> maxes;
-
-    std::vector<int> nboxesList;
 
 
 //xmin y min etc
@@ -396,16 +399,19 @@ void defineAllConstants(ifstream *thefile)
     cutoff=CUTOFF;
     max_level=MAX_LEVEL;
     acc=ACC;
+    int innerCounter=0;
         while (*thefile >> temp)
         {
             switch(a)
             {
             case 0:
             {
-                nboxes=temp;
+                dims=temp;
+                //nboxes=temp;
             }
             case 1:
             {
+                nboxesList.push_back(temp);
                 //min=temp;
             }
             case 2:
