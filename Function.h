@@ -18,6 +18,7 @@ class Function
     //unused
     Function(std::string function);
     Function();
+    //    double value(std::vector<double> values) override;
     virtual double value(std::vector<double> values);
     //TODO: implement this if necessary
     double derivative(double x, double y);

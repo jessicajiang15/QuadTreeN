@@ -6,7 +6,6 @@
 #include <chrono>
 #include "Test2DExpFcn.h"
 #include "GaussianN.h"
-
 //define everything as a floating point
 
 /** 
@@ -14,13 +13,13 @@
  * */
 
 //how many dimensions do u have
-#define DIMS 3
+#define DIMS 2
 
 //Nboxes^N total boxes
-#define NBOXES 11
+#define NBOXES 10
 
-#define DRAW_DIM_1 1
-#define DRAW_DIM_2 2
+#define DRAW_DIM_1 0
+#define DRAW_DIM_2 1
 /**
  * Parameters of the gaussian functions
  * Gives an initial gaussian of the form AINIT*E^[-(x-X1)^2-(y-Y1)^2/RHO^2]
@@ -32,7 +31,7 @@
 #define AUTO_NORM true
 #define P 0.25
 #define RHO 0.5
-#define THETA M_PI/4
+#define THETA M_PI/2
 //note: x1 and y1 are equivalent to x2 and y2 in the mathematica notebook
 #define X1 0
 #define Y1 0
@@ -52,12 +51,11 @@
 #define ACC 1000
 #define CUTOFF_ACC 10
 #define READ_FILE false
-
 /*
 Gaussian Quadrature related definitions.
 */
 //true if auto (generate weights with algorithm inside this program), false if read (directly take weights from file)
-#define GAUSS_AUTO_OR_READ false
+#define GAUSS_AUTO_OR_READ true
 //Order of legendre polynomial if auto, ignored if read
 #define N 10
 //Maximum iterations for newton's method
@@ -96,7 +94,7 @@ double y_1=Y1;
     std::vector<double> maxes;
 
     std::vector<int> nboxesList;
-    
+
 void appendDataToFile(ofstream *file);
 
 void defineAllConstants(ifstream *file);
@@ -104,36 +102,9 @@ void defineAllConstants(ifstream *file);
 void defineAllConstantsNoRead();
 
 
-
-
-
-
 int main()
 {
-    displacements.push_back(x1);
-    displacements.push_back(y_1);
-    displacements.push_back(0);
-    displacements.push_back(0);
-
-
-    double min;
-    double max;
-
-
-
-//xmin y min etc
-    for(int i=0;i<DIMS;i++)
-    {
-        mins.push_back(themin);
-        maxes.push_back(themax);
-    }
-
-    //change this if you want different nboxes for each
-    for(int i=0;i<DIMS;i++)
-    {
-        nboxesList.push_back(NBOXES);
-    }
-
+    
     /**
      * define the files that we will put data in and also open them. Note that this will
      * override any preexisting file named "inData.csv" and "outData.csv", so make sure
@@ -151,7 +122,8 @@ int main()
 #define RHO 0.5
 #define THETA -M_PI / 4
 #define X1 0
-#define Y1 0
+#define Y1 0list
+
 #define AINIT 1 / M_PI
 #define AFIN 1 / M_PI
  * */
@@ -213,12 +185,24 @@ int main()
     else
     {
         //defineAllConstantsNoRead();
-       // std::cout<< cutoff << std::endl;
-       // cout<<"nBOXX"<<nboxes<<endl;
-       // cout<<cutoff<<endl;
-       // cout<<tol<<endl;
-       // cout<<max_level<<endl;
-        //cout<<acc<<endl;
+    displacements.push_back(x1);
+    displacements.push_back(y_1);
+    displacements.push_back(0);
+    displacements.push_back(0);
+
+//xmin y min etc
+    for(int i=0;i<DIMS;i++)
+    {
+        mins.push_back(themin);
+        maxes.push_back(themax);
+    }
+
+    //change this if you want different nboxes for each
+    for(int i=0;i<DIMS;i++)
+    {
+        nboxesList.push_back(NBOXES);
+    }
+
     }
 
 
@@ -236,6 +220,8 @@ int main()
      * defined above. If you want to make a change to the constants, change the values after the #define
      * preprocessors.
      * */
+
+    cout<<"SJZEEEE"<<mins.size()<<endl;
 
     Forest *forest = new Forest(nboxesList, mins, maxes, DRAW_DIM_1, DRAW_DIM_2);
     double cut = forest->getScaledCutOffMinSizeDif(nboxes, cutoff);
@@ -271,16 +257,16 @@ int main()
    // cout << initial->getNormConstant() << endl;
     CompTwoFunc *gaussian = new CompTwoFunc(initial, final);
     std::vector<double> values;
-    for(int i=0;i<2;i++)
+    for(int i=0;i<dims;i++)
     {
         values.push_back(0.1);
     }
-    values.push_back(0.1);
-    values.push_back(0.1);
 
-    cout << "val initial"<<initial->value(values) << endl;
-    cout << "val final"<<final->value(values) << endl;
-    cout << "val difference"<<gaussian->value(values) << endl;
+    
+
+    std::cout << "val initial"<<initial->value(values) << std::endl;
+    std::cout << "val final"<<final->value(values) << std::endl;
+    std::cout << "val difference"<<gaussian->value(values) << std::endl;
 
     std::cout<<"eeeeeee"<<forest->getForest().size()<<std::endl;
     std::cout<<"WHAAAAAA"<<forest->getForest()[0]->getRoot()->getRekt()->getN()<<std::endl;
@@ -320,7 +306,7 @@ int main()
     music.setVolume(50);
     //music.play();
 */
-    cout << "I'm done!" << endl;
+    std::cout << "I'm done!" << std::endl;
     //this while loop basically keeps the graphics up and running.
     while (window.isOpen())
     {
@@ -389,7 +375,11 @@ void defineAllConstants(ifstream *thefile)
 {
     int a=0;
     double temp;
-    nboxes=NBOXES;
+
+    mins.clear();
+    maxes.clear();
+    nboxesList.clear();
+
     /*
     min_y=MIN_Y;
     max_y=MAX_Y;
@@ -402,78 +392,84 @@ void defineAllConstants(ifstream *thefile)
     int innerCounter=0;
         while (*thefile >> temp)
         {
-            switch(a)
-            {
-            case 0:
+            std::cout<<"temp: "<<temp<<endl;
+            std::cout<<"a: "<<a<<endl;
+
+            if(a==0)
             {
                 dims=temp;
                 //nboxes=temp;
             }
-            case 1:
+            else if(a==1)
             {
                 nboxesList.push_back(temp);
+            }
+            else if(a==2)            
+            {
+                mins.push_back(temp);
+            }
+            else if(a==3)
+            {
+                maxes.push_back(temp);
                 //min=temp;
             }
-            case 2:
+            else if(a==4)
             {
-               // max=temp;
+                displacements.push_back(temp);
             }
-            case 3:
+            else if(a==5)
             {
-                //min=temp;
+               cutoff=temp;
             }
-            case 4:
-            {
-               // max=temp;
-            }
-            case 5:
-            {
-                cutoff=temp;
-            }
-            case 6:
+            else if(a==6)
             {
                 max_level=temp;
             }
-            case 7:
+            else if(a==7)
             {
                 acc=temp;
             }
-            case 8:
+            else if(a==8)
             {
                 tol=temp;
             }
-            case 9:
+            else if(a==9)
             {
                 theta=temp;
             }
-            case 10:
+            else if(a==10)
             {
                 p=temp;
             }
-            case 11:
+            else if(a==11)
             {
                 rho=temp;
             }
-            case 12:
-            {
-                x1=temp;
-            }
-            case 13:
-            {
-                y_1=temp;
-            }
             
+    
+        //cout<<"a: "<<a<<endl;
+        //cout<<"innercounter"<<innerCounter<<endl;
+        if(a>0&&a<5)
+        {
+            innerCounter++;
+            if(innerCounter==dims)
+            {
+                a++;
+                innerCounter=0;
             }
-        a++;
         }
-        //cout<<"HAHAHAHAHHAHA: "<<min_y<<endl;
-        cout<<theta<<endl;
-        cout<<p<<endl;
-        cout<<rho<<endl;
-        cout<<y_1<<endl;
-        cout<<x1<<endl;
-        cout<<"HEHEHEHE"<<endl;
-
+        else
+        {
+            a++;
+        }
+        }
+        std::cout<<"hhehehehehe"<<endl;
+        std::cout<<"dims: "<<dims<<std::endl;
+        std::cout<<theta<<std::endl;
+        std::cout<<p<<std::endl;
+        std::cout<<rho<<std::endl;
+        std::cout<<cutoff<<std::endl;
+        std::cout<<"HEHEHEHE"<<std::endl;
     return;
 }
 

@@ -804,9 +804,8 @@ CMakeFiles/QuadTree.dir/Function.cpp.o: /Users/Jessica/git/QuadTreeN/Function.cp
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/bitset
 
 CMakeFiles/QuadTree.dir/Gaussian.cpp.o: /Users/Jessica/git/QuadTreeN/Gaussian.cpp \
-  /Users/Jessica/git/QuadTree/Gaussian.cpp \
-  /Users/Jessica/git/QuadTree/Gaussian.h \
-  /Users/Jessica/git/QuadTree/Function.h \
+  /Users/Jessica/git/QuadTreeN/Gaussian.h \
+  /Users/Jessica/git/QuadTreeN/Function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \
@@ -4793,8 +4792,6 @@ CMakeFiles/QuadTree.dir/twoVectsDoub.cpp.o: /Users/Jessica/git/QuadTreeN/twoVect
 
 /Users/Jessica/git/QuadTreeN/twoVects.cpp:
 
-/Users/Jessica/git/QuadTreeN/Gaussian.h:
-
 /Users/Jessica/git/QuadTreeN/main.cpp:
 
 /Users/Jessica/git/QuadTree/Test2DExpFcn.h:
@@ -4811,7 +4808,7 @@ CMakeFiles/QuadTree.dir/twoVectsDoub.cpp.o: /Users/Jessica/git/QuadTreeN/twoVect
 
 /Users/Jessica/git/QuadTreeN/GaussianN.h:
 
-/Users/Jessica/git/QuadTree/Gaussian.h:
+/Users/Jessica/git/QuadTreeN/Gaussian.h:
 
 /Users/Jessica/git/QuadTreeN/Gaussian.cpp:
 
@@ -5172,8 +5169,6 @@ CMakeFiles/QuadTree.dir/twoVectsDoub.cpp.o: /Users/Jessica/git/QuadTreeN/twoVect
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/runetype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/xlocale.h:
-
-/Users/Jessica/git/QuadTree/Gaussian.cpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/i386/endian.h:
 

@@ -48,6 +48,9 @@ double RectangleN::integrate(Function *F)
 
 double RectangleN::approx(Function *F)
 {
+    //std::cout<<getVol()<<std::endl;
+    //std::cout<<F->value(this->getMidPoint()->getCoords())<<std::endl;
+    //std::cout<<getVol()*F->value(this->getMidPoint()->getCoords())<<std::endl;
     return getVol()*F->value(this->getMidPoint()->getCoords());
 }
 
