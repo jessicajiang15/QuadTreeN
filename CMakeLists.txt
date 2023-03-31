@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.13)
 find_package(SFML COMPONENTS system window graphics audio REQUIRED)
+
+
+
 include_directories(${SFML_INCLUDE_DIR})
+
 set(CMAKE_CXX_FLAGS "-O0 -ggdb")
 set (CMAKE_CXX_STANDARD 11)
 

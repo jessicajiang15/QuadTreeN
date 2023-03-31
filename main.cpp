@@ -50,7 +50,7 @@
 //note that this includes the normalization accuracy.
 #define ACC 1000
 #define CUTOFF_ACC 10
-#define READ_FILE false
+#define READ_FILE true
 /*
 Gaussian Quadrature related definitions.
 */
@@ -262,7 +262,7 @@ int main()
         values.push_back(0.1);
     }
 
-    
+
 
     std::cout << "val initial"<<initial->value(values) << std::endl;
     std::cout << "val final"<<final->value(values) << std::endl;
