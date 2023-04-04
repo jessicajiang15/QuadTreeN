@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/clang++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/local/include
+CXX_INCLUDES = -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include
 
 CXX_FLAGS = -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11
 

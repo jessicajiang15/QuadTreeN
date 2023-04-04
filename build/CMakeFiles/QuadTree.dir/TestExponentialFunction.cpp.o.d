@@ -1,7 +1,7 @@
 CMakeFiles/QuadTree.dir/TestExponentialFunction.cpp.o: \
-  /Users/Jessica/git/QuadTree/TestExponentialFunction.cpp \
-  /Users/Jessica/git/QuadTree/TestExponentialFunction.h \
-  /Users/Jessica/git/QuadTree/OneDFunction.h \
+  /Users/Jessica/git/QuadTreeN/TestExponentialFunction.cpp \
+  /Users/Jessica/git/QuadTreeN/TestExponentialFunction.h \
+  /Users/Jessica/git/QuadTreeN/OneDFunction.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/math.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/usr/include/pthread.h \

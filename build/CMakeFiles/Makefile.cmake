@@ -37,6 +37,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/lib/cmake/SFML/SFMLConfigVersion.cmake"
   "/usr/local/lib/cmake/SFML/SFMLSharedTargets-release.cmake"
   "/usr/local/lib/cmake/SFML/SFMLSharedTargets.cmake"
+  "/usr/local/share/eigen3/cmake/Eigen3Config.cmake"
+  "/usr/local/share/eigen3/cmake/Eigen3ConfigVersion.cmake"
+  "/usr/local/share/eigen3/cmake/Eigen3Targets.cmake"
   )
 
 # The corresponding makefile is:

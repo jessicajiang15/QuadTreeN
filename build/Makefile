@@ -293,6 +293,30 @@ GraphicsMechanics.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.s
 .PHONY : GraphicsMechanics.cpp.s
 
+InterpolatedFunction.o: InterpolatedFunction.cpp.o
+.PHONY : InterpolatedFunction.o
+
+# target to build an object file
+InterpolatedFunction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/InterpolatedFunction.cpp.o
+.PHONY : InterpolatedFunction.cpp.o
+
+InterpolatedFunction.i: InterpolatedFunction.cpp.i
+.PHONY : InterpolatedFunction.i
+
+# target to preprocess a source file
+InterpolatedFunction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/InterpolatedFunction.cpp.i
+.PHONY : InterpolatedFunction.cpp.i
+
+InterpolatedFunction.s: InterpolatedFunction.cpp.s
+.PHONY : InterpolatedFunction.s
+
+# target to generate assembly for a file
+InterpolatedFunction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QuadTree.dir/build.make CMakeFiles/QuadTree.dir/InterpolatedFunction.cpp.s
+.PHONY : InterpolatedFunction.cpp.s
+
 LegendrePolynomial.o: LegendrePolynomial.cpp.o
 .PHONY : LegendrePolynomial.o
 
@@ -634,6 +658,9 @@ help:
 	@echo "... GraphicsMechanics.o"
 	@echo "... GraphicsMechanics.i"
 	@echo "... GraphicsMechanics.s"
+	@echo "... InterpolatedFunction.o"
+	@echo "... InterpolatedFunction.i"
+	@echo "... InterpolatedFunction.s"
 	@echo "... LegendrePolynomial.o"
 	@echo "... LegendrePolynomial.i"
 	@echo "... LegendrePolynomial.s"

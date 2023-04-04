@@ -209,6 +209,26 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Dot tool for use with Doxygen
+DOXYGEN_DOT_EXECUTABLE:FILEPATH=DOXYGEN_DOT_EXECUTABLE-NOTFOUND
+
+//Doxygen documentation generation tool (http://www.doxygen.org)
+DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
+
+//Directory where the Eigen library is located.
+EIGEN_DIRECTORY:STRING=/Users/Jessica/git/QuadTreeN/external/splinter/thirdparty/Eigen
+
+//The directory containing a CMake configuration file for Eigen3.
+Eigen3_DIR:PATH=/usr/local/share/eigen3/cmake
+
+//Absolute path, or, if relative, relative to CMAKE_INSTALL_PREFIX
+// to install the header files.
+HEADER_INSTALL_DIRECTORY:STRING=include
+
+//Absolute path, or, if relative, relative to CMAKE_INSTALL_PREFIX
+// to install the library file.
+LIBRARY_INSTALL_DIRECTORY:STRING=lib
+
 //Value Computed by CMake
 Project_BINARY_DIR:STATIC=/Users/Jessica/git/QuadTreeN/build
 
@@ -224,8 +244,26 @@ SFML_DIR:PATH=/usr/local/lib/cmake/SFML
 //Path to a file.
 SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
 
+//Value Computed by CMake
+SPLINTER_BINARY_DIR:STATIC=/Users/Jessica/git/QuadTreeN/build/external/splinter
+
 //The directory containing a CMake configuration file for SPLINTER.
 SPLINTER_DIR:PATH=SPLINTER_DIR-NOTFOUND
+
+//Path to a file.
+SPLINTER_INCLUDE_DIR:PATH=/Users/Jessica/git/QuadTreeN/external/splinter/include
+
+//Value Computed by CMake
+SPLINTER_IS_TOP_LEVEL:STATIC=OFF
+
+//Path to a library.
+SPLINTER_LIBRARY_FILE:FILEPATH=/usr/local/lib/libsplinter-3-0.dylib
+
+//Value Computed by CMake
+SPLINTER_SOURCE_DIR:STATIC=/Users/Jessica/git/QuadTreeN/external/splinter
+
+//Path to a file.
+external:PATH=external-NOTFOUND
 
 
 ########################
@@ -367,4 +405,8 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DOXYGEN_DOT_EXECUTABLE
+DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DOXYGEN_EXECUTABLE
+DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 

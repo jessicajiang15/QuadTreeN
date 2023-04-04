@@ -69,6 +69,11 @@
         "map": "cpp",
         "filesystem": "cpp",
         "set": "cpp",
-        "clocale": "cpp"
+        "clocale": "cpp",
+        "dense": "cpp",
+        "list": "cpp",
+        "numeric": "cpp",
+        "queue": "cpp",
+        "thread": "cpp"
     }
 }

@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/QuadTree.dir/GaussianN.cpp.o.d"
   "CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.o"
   "CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.o.d"
+  "CMakeFiles/QuadTree.dir/InterpolatedFunction.cpp.o"
+  "CMakeFiles/QuadTree.dir/InterpolatedFunction.cpp.o.d"
   "CMakeFiles/QuadTree.dir/LegendrePolynomial.cpp.o"
   "CMakeFiles/QuadTree.dir/LegendrePolynomial.cpp.o.d"
   "CMakeFiles/QuadTree.dir/Node.cpp.o"

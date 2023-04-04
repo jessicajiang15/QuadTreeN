@@ -6,6 +6,13 @@
 #include <chrono>
 #include "Test2DExpFcn.h"
 #include "GaussianN.h"
+#include "InterpolatedFunction.h"
+
+
+//#include "external/splinter/include/bspline.h"
+//#include "external/splinter/include/bsplinebuilder.h"
+//#include "external/splinter/include/datatable.h"
+
 //define everything as a floating point
 
 /** 
@@ -44,13 +51,14 @@
 //defines the maximum level you will allow the grid to divide to.
 #define MAX_LEVEL 4
 //determines how finely you divide the grid
-#define TOL 0.0001
+#define TOL 0.00005
 //determines how accurate the numerical integrals are, overall. 10 means "divide the current box into 10, then
 //calculate the midpoint riemann sum for all 10 mini-boxes and add them up to get my approximation."
 //note that this includes the normalization accuracy.
 #define ACC 1000
 #define CUTOFF_ACC 10
-#define READ_FILE true
+#define READ_FILE false
+#define INTERPOLATING true
 /*
 Gaussian Quadrature related definitions.
 */
@@ -64,8 +72,10 @@ Gaussian Quadrature related definitions.
 //how many digits you want in the final value
 #define PRECISION 50
 
-#define MIN -5;
-#define MAX 5;
+#define MIN -5
+#define MAX 5
+
+SPLINTER::DataTable datatable;
 
 
 int nboxes=NBOXES;
@@ -78,7 +88,7 @@ double acc=ACC;
 double p=P;
 double rho=RHO;
 double theta=THETA;
-int dims=4;
+int dims=DIMS;
 
 int themin=-5;
 
@@ -101,6 +111,9 @@ void defineAllConstants(ifstream *file);
 
 void defineAllConstantsNoRead();
 
+double f(SPLINTER::DenseVector x);
+
+void readDatatable(ifstream *thefile);
 
 int main()
 {
@@ -136,6 +149,8 @@ int main()
     ifstream weights2;
     ifstream params;
 
+    ifstream table;
+
 
     ofstream cellCoords;
 
@@ -152,6 +167,8 @@ int main()
     weights1.open("weights1.txt");
     weights2.open("weights2.txt");
     params.open("params.csv");
+
+    table.open("function.csv");
 
     if (weights2.fail())
     {
@@ -172,12 +189,15 @@ int main()
     }
     if(params.fail())
     {
-        std::cout<<"I FAILELDELDELDLE"<< std::endl;
+        std::cout<<"Parameters file failed to load."<< std::endl;
+    }
+    if(table.fail())
+    {
+        std::cout<<"Function table file failed to load"<<std::endl;
     }
 
     if(READ_FILE)
     {
-        cout<<"helloooo"<<endl;
         defineAllConstants(&params);
         //defineAllConstantsNoRead();
 
@@ -189,6 +209,13 @@ int main()
     displacements.push_back(y_1);
     displacements.push_back(0);
     displacements.push_back(0);
+    }
+
+    if(INTERPOLATING)
+    {
+        std::cout<<"Interpolating."<<std::endl;
+        readDatatable(&table);
+    }
 
 //xmin y min etc
     for(int i=0;i<DIMS;i++)
@@ -201,8 +228,6 @@ int main()
     for(int i=0;i<DIMS;i++)
     {
         nboxesList.push_back(NBOXES);
-    }
-
     }
 
 
@@ -232,14 +257,28 @@ int main()
     //Forest *normForest = new Forest(100, 100, mins, maxes);
     //double a, double rho, double p, double theta,double x1, double y1
     //double a, double b, double c, double d, double e, int type
-    GaussianN *initial = new GaussianN(AFIN,rho,p,theta,displacements,DIMS, 1);
-    GaussianN *final = new GaussianN(AINIT, rho, p, theta,displacements,DIMS);
+    
     //double rho, double p, double theta, std::vector<double> displacements, int N
+    Function *func;
 
-    /**
-     * Normalize our initial and final functions with the normForest, which splits
-     * the function into an 100x100 grid and calculates the midpoint riemann sum.
-     * */
+    if(INTERPOLATING)
+    {
+        //SPLINTER::DataTable samples, int dim, int degree, bool p
+        //std::cout<<"is complete"<<datatable.isGridComplete()<<std::endl;
+        func=new InterpolatedFunction(datatable, dims, 1, true);
+    std::vector<double> values;
+    for(int i=0;i<dims;i++)
+    {
+        values.push_back(0.1);
+    }
+    std::cout<<"hello?????????? "<<std::endl;
+    std::cout<<"hello?????????? "<<func->value(values)<<std::endl;
+
+    }
+    else
+    {
+GaussianN *initial = new GaussianN(AFIN,rho,p,theta,displacements,DIMS, 1);
+    GaussianN *final = new GaussianN(AINIT, rho, p, theta,displacements,DIMS);
     if (AUTO_NORM)
     {
         cout<<"auto norm"<<endl;
@@ -255,7 +294,7 @@ int main()
 
     //cout << final->getNormConstant() << endl;
    // cout << initial->getNormConstant() << endl;
-    CompTwoFunc *gaussian = new CompTwoFunc(initial, final);
+    func = new CompTwoFunc(initial, final);
     std::vector<double> values;
     for(int i=0;i<dims;i++)
     {
@@ -266,18 +305,23 @@ int main()
 
     std::cout << "val initial"<<initial->value(values) << std::endl;
     std::cout << "val final"<<final->value(values) << std::endl;
-    std::cout << "val difference"<<gaussian->value(values) << std::endl;
+    std::cout << "val difference"<<func->value(values) << std::endl;
 
     std::cout<<"eeeeeee"<<forest->getForest().size()<<std::endl;
     std::cout<<"WHAAAAAA"<<forest->getForest()[0]->getRoot()->getRekt()->getN()<<std::endl;
 
+    }
+    /**
+     * Normalize our initial and final functions with the normForest, which splits
+     * the function into an 100x100 grid and calculates the midpoint riemann sum.
+     * */
     //cout<<final->getNormConst()<<endl;
     //cout<<initial->getNormConst()<<endl;
     //if anything in this program is taking too long, feel free to use these commented out lines of code
     //to figure out how much time a portion of the code is taking.
 
     //UNCOMMENT OUT
-    forest->divideComp(tol, gaussian, max_level, DRAW_DIM_1,DRAW_DIM_2);
+    forest->divideComp(tol, func, max_level, DRAW_DIM_1,DRAW_DIM_2);
     //std::cout<<"total number of boxes:"<<forest->getNumLeaves()<<std::endl;
 
     //std::cout<<"eeeeeee"<<forest->getForest().size()<<std::endl;
@@ -307,6 +351,7 @@ int main()
     //music.play();
 */
     std::cout << "I'm done!" << std::endl;
+
     //this while loop basically keeps the graphics up and running.
     while (window.isOpen())
     {
@@ -491,4 +536,34 @@ void defineAllConstantsNoRead()
     rho=RHO;
     x1=X1;
     y_1=Y1;
+}
+
+void readDatatable(ifstream *thefile)
+{
+    double temp;
+    SPLINTER::DenseVector x(dims);
+    int n=0;
+    double y;
+    int te=0;
+    while (*thefile >> temp)
+    {
+       // std::cout<<"lol"<<std::endl;
+        if(n>=dims)
+        {
+            y=temp;
+        }
+        else
+        {
+            x(n)=temp;
+            //std::cout<<"n"<<x(n)<<std::endl;
+        }
+        n++;
+        if(n>dims)
+        {
+            te++;
+            //std::cout<<"lol"<<te<<std::endl;
+            datatable.addSample(x, y);
+            n=0;
+        }
+    }
 }

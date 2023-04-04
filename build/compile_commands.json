@@ -1,97 +1,102 @@
 [
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/main.cpp.o -c /Users/Jessica/git/QuadTreeN/main.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/main.cpp.o -c /Users/Jessica/git/QuadTreeN/main.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/main.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Node.cpp.o -c /Users/Jessica/git/QuadTreeN/Node.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Node.cpp.o -c /Users/Jessica/git/QuadTreeN/Node.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Node.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/QuadTree.cpp.o -c /Users/Jessica/git/QuadTreeN/QuadTree.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/QuadTree.cpp.o -c /Users/Jessica/git/QuadTreeN/QuadTree.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/QuadTree.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Point.cpp.o -c /Users/Jessica/git/QuadTreeN/Point.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Point.cpp.o -c /Users/Jessica/git/QuadTreeN/Point.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Point.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/RectangleN.cpp.o -c /Users/Jessica/git/QuadTreeN/RectangleN.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/RectangleN.cpp.o -c /Users/Jessica/git/QuadTreeN/RectangleN.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/RectangleN.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/twoVects.cpp.o -c /Users/Jessica/git/QuadTreeN/twoVects.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/twoVects.cpp.o -c /Users/Jessica/git/QuadTreeN/twoVects.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/twoVects.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Function.cpp.o -c /Users/Jessica/git/QuadTreeN/Function.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Function.cpp.o -c /Users/Jessica/git/QuadTreeN/Function.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Function.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.o -c /Users/Jessica/git/QuadTreeN/GraphicsMechanics.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/GraphicsMechanics.cpp.o -c /Users/Jessica/git/QuadTreeN/GraphicsMechanics.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/GraphicsMechanics.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Forest.cpp.o -c /Users/Jessica/git/QuadTreeN/Forest.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Forest.cpp.o -c /Users/Jessica/git/QuadTreeN/Forest.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Forest.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Gaussian.cpp.o -c /Users/Jessica/git/QuadTreeN/Gaussian.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Gaussian.cpp.o -c /Users/Jessica/git/QuadTreeN/Gaussian.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Gaussian.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/CompTwoFunc.cpp.o -c /Users/Jessica/git/QuadTreeN/CompTwoFunc.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/CompTwoFunc.cpp.o -c /Users/Jessica/git/QuadTreeN/CompTwoFunc.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/CompTwoFunc.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/twoVectsDoub.cpp.o -c /Users/Jessica/git/QuadTreeN/twoVectsDoub.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/twoVectsDoub.cpp.o -c /Users/Jessica/git/QuadTreeN/twoVectsDoub.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/twoVectsDoub.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/tripleVect.cpp.o -c /Users/Jessica/git/QuadTreeN/tripleVect.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/tripleVect.cpp.o -c /Users/Jessica/git/QuadTreeN/tripleVect.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/tripleVect.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/LegendrePolynomial.cpp.o -c /Users/Jessica/git/QuadTreeN/LegendrePolynomial.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/LegendrePolynomial.cpp.o -c /Users/Jessica/git/QuadTreeN/LegendrePolynomial.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/LegendrePolynomial.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/TestExponentialFunction.cpp.o -c /Users/Jessica/git/QuadTreeN/TestExponentialFunction.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/TestExponentialFunction.cpp.o -c /Users/Jessica/git/QuadTreeN/TestExponentialFunction.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/TestExponentialFunction.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/OneDFunction.cpp.o -c /Users/Jessica/git/QuadTreeN/OneDFunction.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/OneDFunction.cpp.o -c /Users/Jessica/git/QuadTreeN/OneDFunction.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/OneDFunction.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Test2DExpFcn.cpp.o -c /Users/Jessica/git/QuadTreeN/Test2DExpFcn.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Test2DExpFcn.cpp.o -c /Users/Jessica/git/QuadTreeN/Test2DExpFcn.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Test2DExpFcn.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Pointint.cpp.o -c /Users/Jessica/git/QuadTreeN/Pointint.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/Pointint.cpp.o -c /Users/Jessica/git/QuadTreeN/Pointint.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/Pointint.cpp"
 },
 {
   "directory": "/Users/Jessica/git/QuadTreeN/build",
-  "command": "/usr/bin/clang++  -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/GaussianN.cpp.o -c /Users/Jessica/git/QuadTreeN/GaussianN.cpp",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/GaussianN.cpp.o -c /Users/Jessica/git/QuadTreeN/GaussianN.cpp",
   "file": "/Users/Jessica/git/QuadTreeN/GaussianN.cpp"
+},
+{
+  "directory": "/Users/Jessica/git/QuadTreeN/build",
+  "command": "/usr/bin/clang++  -I/usr/local/include/eigen3 -I/Users/Jessica/git/QuadTreeN/external/splinter/include -isystem /usr/local/include -O0 -ggdb -O3 -DNDEBUG -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -std=gnu++11 -o CMakeFiles/QuadTree.dir/InterpolatedFunction.cpp.o -c /Users/Jessica/git/QuadTreeN/InterpolatedFunction.cpp",
+  "file": "/Users/Jessica/git/QuadTreeN/InterpolatedFunction.cpp"
 }
 ]
