@@ -1,2 +1,7 @@
 build
 external
+*.csv
+.VSCodeCounter
+.vscode
+music
+.DS_Store
