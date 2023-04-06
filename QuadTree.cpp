@@ -300,6 +300,14 @@ void QuadTree::divideCompMid(std::vector<double> mins, std::vector<double> maxes
     else
     {
         n->getRekt()->createSfRectFromCartesian(mins[0], maxes[0], mins[0], maxes[0], dim1, dim2);
+        if(temp<-0.00001/pow(4,n->getLevel()))
+        {
+            n->getRekt()->setColor("inbox");
+        }
+        else if(temp>0.00001/pow(4,n->getLevel()))
+        {
+            n->getRekt()->setColor("outbox");
+        }
         return;
     }
 }
@@ -346,6 +354,7 @@ tripleVect *QuadTree::getAllRelevantVects(Node *n, Function *F, double cutoff)
         if (integral < -abs(scaleCutoff(cutoff, n->getLevel())))
         {
             //inboxes
+            //std::cout<<"inbox"<<std::endl;
             t1->v2.push_back(n->getRekt());
             n->getRekt()->setColor("inbox");
             //demand
@@ -430,6 +439,7 @@ tripleVect *QuadTree::getAllRelevantVectsAcc(Node *n, Function *F, double cutoff
             //inboxes
             t1->v2.push_back(n->getRekt());
             //demand
+            //std::cout<<"inbox"<<std::endl;
             n->getRekt()->setColor("inbox");
             t2->v2.push_back(integral);
         }

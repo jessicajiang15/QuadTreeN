@@ -51,14 +51,14 @@
 //defines the maximum level you will allow the grid to divide to.
 #define MAX_LEVEL 4
 //determines how finely you divide the grid
-#define TOL 0.00005
+#define TOL 0.0001
 //determines how accurate the numerical integrals are, overall. 10 means "divide the current box into 10, then
 //calculate the midpoint riemann sum for all 10 mini-boxes and add them up to get my approximation."
 //note that this includes the normalization accuracy.
 #define ACC 1000
 #define CUTOFF_ACC 10
-#define READ_FILE false
-#define INTERPOLATING true
+#define READ_FILE true
+#define INTERPOLATING false
 /*
 Gaussian Quadrature related definitions.
 */
@@ -209,6 +209,21 @@ int main()
     displacements.push_back(y_1);
     displacements.push_back(0);
     displacements.push_back(0);
+
+    //xmin y min etc
+    for(int i=0;i<DIMS;i++)
+    {
+        mins.push_back(themin);
+        maxes.push_back(themax);
+    }
+
+
+    //change this if you want different nboxes for each
+    for(int i=0;i<DIMS;i++)
+    {
+        nboxesList.push_back(NBOXES);
+    }
+
     }
 
     if(INTERPOLATING)
@@ -217,18 +232,7 @@ int main()
         readDatatable(&table);
     }
 
-//xmin y min etc
-    for(int i=0;i<DIMS;i++)
-    {
-        mins.push_back(themin);
-        maxes.push_back(themax);
-    }
 
-    //change this if you want different nboxes for each
-    for(int i=0;i<DIMS;i++)
-    {
-        nboxesList.push_back(NBOXES);
-    }
 
 
     /**
@@ -246,7 +250,6 @@ int main()
      * preprocessors.
      * */
 
-    cout<<"SJZEEEE"<<mins.size()<<endl;
 
     Forest *forest = new Forest(nboxesList, mins, maxes, DRAW_DIM_1, DRAW_DIM_2);
     double cut = forest->getScaledCutOffMinSizeDif(nboxes, cutoff);
@@ -437,8 +440,8 @@ void defineAllConstants(ifstream *thefile)
     int innerCounter=0;
         while (*thefile >> temp)
         {
-            std::cout<<"temp: "<<temp<<endl;
-            std::cout<<"a: "<<a<<endl;
+            //std::cout<<"temp: "<<temp<<endl;
+            //std::cout<<"a: "<<a<<endl;
 
             if(a==0)
             {
@@ -514,7 +517,7 @@ void defineAllConstants(ifstream *thefile)
         std::cout<<p<<std::endl;
         std::cout<<rho<<std::endl;
         std::cout<<cutoff<<std::endl;
-        std::cout<<"HEHEHEHE"<<std::endl;
+        std::cout<<"HEHEHEHE"<<mins.size()<<std::endl;
     return;
 }
 
